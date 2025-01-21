@@ -5,3 +5,4 @@ resources:
 - helmrepo.yaml
 - istio-cni.yaml
 - istiod.yaml
+- ztunnel.yaml
