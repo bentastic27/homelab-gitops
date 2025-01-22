@@ -19,3 +19,4 @@ spec:
     profile: ambient
   dependsOn:
   - name: istio-base
+  - name: istiod
