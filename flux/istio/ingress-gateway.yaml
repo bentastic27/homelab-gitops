@@ -41,3 +41,4 @@ spec:
       enabled: false
   dependsOn:
   - name: istio-base
+  - name: istiod
