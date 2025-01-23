@@ -6,3 +6,4 @@ resources:
 - istio
 - ddns-route53
 - cpu-requests-remover-webhook
+- openebs
