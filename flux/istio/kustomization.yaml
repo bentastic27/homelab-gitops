@@ -7,3 +7,4 @@ resources:
 - istiod.yaml
 - ztunnel.yaml
 - ingress-gateway.yaml
+- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.2.1/standard-install.yaml
