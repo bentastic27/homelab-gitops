@@ -27,7 +27,3 @@ spec:
       replicated:
         mayastor:
           enabled: false
-    localpv-provisioner:
-      hostpathClass:
-        ext4Quota:
-          enabled: true
