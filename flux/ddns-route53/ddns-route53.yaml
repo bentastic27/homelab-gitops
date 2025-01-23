@@ -1,60 +1,16 @@
-apiVersion: v1
-kind: Namespace
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
 metadata:
-  name: ddns-route53
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: aws-creds
-  namespace: ddns-route53
-stringData:
-  aws-access-key: ${accessKeyId}
-  aws-secret-key: ${secretAccessKey}
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ddns-route53
-  namespace: ddns-route53
+  name: ddns-route53-manifests
+  namespace: flux
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ddns-route53
-  template:
-    metadata:
-      labels:
-        app: ddns-route53
-    spec:
-      containers:
-      - name: ddns-route53
-        image: crazymax/ddns-route53:2.9.0
-        env:
-        - name: TZ
-          value: America/Detroit
-        - name: SCHEDULE
-          value: "*/30 * * * *"
-        - name: LOG_LEVEL
-          value: "info"
-        - name: LOG_JSON
-          value: "false"
-        - name: DDNSR53_ROUTE53_HOSTEDZONEID
-          value: "Z0466241UWHPLQN701UT"
-        - name: DDNSR53_ROUTE53_RECORDSSET_0_NAME
-          value: "beansnet.net"
-        - name: DDNSR53_ROUTE53_RECORDSSET_0_TYPE
-          value: "A"
-        - name: DDNSR53_ROUTE53_RECORDSSET_0_TTL
-          value: "300"
-        - name: DDNSR53_CREDENTIALS_ACCESSKEYID
-          valueFrom:
-            secretKeyRef:
-              name: aws-creds
-              key: aws-access-key
-        - name: DDNSR53_CREDENTIALS_SECRETACCESSKEY
-          valueFrom:
-            secretKeyRef:
-              name: aws-creds
-              key: aws-secret-key
+  interval: 10m0s
+  path: "./flux/ddns-route53/manifests"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux
+  postBuild:
+    substituteFrom:
+    - kind: Secret
+      name: route53-credentials-secret
