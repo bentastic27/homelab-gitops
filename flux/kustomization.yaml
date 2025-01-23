@@ -5,3 +5,4 @@ resources:
 - cert-manager
 - istio
 - ddns-route53
+- cpu-requests-remover-webhook
