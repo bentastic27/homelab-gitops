@@ -10,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux
-  substituteFrom:
-  - kind: Secret
-    name: route53-credentials-secret
+  postBuild:
+    substituteFrom:
+    - kind: Secret
+      name: route53-credentials-secret
