@@ -2,10 +2,14 @@
 
 # RKE2 / Ubuntu 24.04 prereqs
 
-Add `usrquota,grpquota` to the mount options for `/` in `/etc/fstab`.
+`/etc/rancher/rke2/config.yaml` content:
 
 ```
-apt -y install quota quotatool
+tls-san:
+- lab.beansnet.net
+- "192.168.1.10"
+disable: rke2-ingress-nginx
+disable-cloud-controller: true
 ```
 
 ## Init
