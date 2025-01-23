@@ -8,4 +8,4 @@ spec:
   ref:
     branch: main
   timeout: 60s
-  url: ssh://git@github.com/bentastic27/cpu-requests-remover-webhook
+  url: https://github.com/bentastic27/cpu-requests-remover-webhook
