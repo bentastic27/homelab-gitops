@@ -1,5 +1,13 @@
 # homelab-gitops
 
+# RKE2 / Ubuntu 24.04 prereqs
+
+Add `usrquota,grpquota` to the mount options for `/` in `/etc/fstab`.
+
+```
+apt -y install quota quotatool
+```
+
 ## Init
 
 ```
