@@ -7,3 +7,4 @@ resources:
 - istiod.yaml
 - ztunnel.yaml
 - ingress-gateway.yaml
+- manifests.yaml
