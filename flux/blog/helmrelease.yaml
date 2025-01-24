@@ -10,13 +10,9 @@ spec:
   targetNamespace: blog
   install:
     createNamespace: true
-  chart:
-    spec:
-      chart: base-components
-      version: '0.0.1'
-      chartRef:
-        kind: HelmChart
-        name: base-components
+  chartRef:
+    kind: HelmChart
+    name: base-components
   values:
     hostname: blog.beansnet.net
     clusterIssuer: letsencrypt-dns-cluster-issuer
