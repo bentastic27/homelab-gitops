@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmChart
+metadata:
+  name: base-components
+  namespace: flux
+spec:
+  interval: 10m0s
+  path: ./charts/base-components
+  sourceRef:
+    kind: GitRepository
+    name: flux

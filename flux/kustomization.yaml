@@ -7,3 +7,4 @@ resources:
 - ddns-route53
 - cpu-requests-remover-webhook
 - openebs
+- charts.yaml
