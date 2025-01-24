@@ -14,7 +14,7 @@ spec:
     spec:
       chart: base-components
       version: '0.0.1'
-      sourceRef:
+      chartRef:
         kind: HelmChart
         name: base-components
   values:
