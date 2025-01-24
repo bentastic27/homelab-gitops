@@ -29,3 +29,7 @@ flux bootstrap -n flux github \
   --personal=true \
   --path=flux
 ```
+
+## Lenovo M715q
+
+Disable C(6) states in bios.
