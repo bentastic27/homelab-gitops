@@ -4,7 +4,8 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  gatewayClassName: istio
+  selector:
+    istio: ingress
   listeners:
   - name: http
     hostname: {{ .Values.hostname }}
