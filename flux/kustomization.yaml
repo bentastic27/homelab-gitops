@@ -8,3 +8,4 @@ resources:
 - cpu-requests-remover-webhook
 - openebs
 - charts.yaml
+- blog
