@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
-    istio: ingress
+    istio: ingress-gateway
   listeners:
   - name: http
     hostname: {{ .Values.hostname }}
