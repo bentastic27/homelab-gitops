@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    hostname: {{ .Values.hostname }}
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: Same
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - {{ .Values.hostname }}
