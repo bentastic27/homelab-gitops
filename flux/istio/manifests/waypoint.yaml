@@ -1,8 +1,6 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  labels:
-    istio.io/waypoint-for: all
   name: shared-waypoint
   namespace: istio-system
 spec:
