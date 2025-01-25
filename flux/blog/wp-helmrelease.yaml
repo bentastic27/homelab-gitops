@@ -33,4 +33,3 @@ spec:
             memory: 512Mi
   dependsOn:
   - name: istiod
-  - name: blog-mariadb
