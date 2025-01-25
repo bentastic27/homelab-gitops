@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: blog-mariadb
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: mariadb
+  targetNamespace: blog
+  chart:
+    spec:
+      chart: mariadb
+      version: '20.2.2'
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+      interval: 5m
+  values:
+    global:
+      defaultStorageClass: openebs-hostpath
+  dependsOn:
+  - name: istiod
