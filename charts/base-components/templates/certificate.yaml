@@ -4,7 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: istio-system
 spec:
-  secretName: {{ .Release.Name }}
+  secretName: {{ .Release.Name }}-cert
   commonName: {{ .Values.hostname }}
   dnsNames:
   - {{ .Values.hostname }}

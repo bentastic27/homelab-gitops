@@ -6,17 +6,20 @@ metadata:
 spec:
   selector:
     istio: ingress-gateway
-  listeners:
+  servers:
   - name: http
     hostname: {{ .Values.hostname }}
     port: 80
     protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: Same
+    tls:
+      httpsRedirect: true
   - port:
       number: 443
       name: https
       protocol: HTTPS
     hosts:
     - {{ .Values.hostname }}
+    tls:
+      credentialName: {{ .Release.Name }}-cert
+      maxProtocolVersion: TLSV1_3
+      minProtocolVersion: TLSV1_2
