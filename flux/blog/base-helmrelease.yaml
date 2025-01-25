@@ -21,19 +21,5 @@ spec:
       port: 80
     authPolicy:
       allowAll: false
-  postRenderers:
-  - kustomize:
-      patches:
-      - target:
-          version: v1
-          kind: Namespace
-          name: blog
-        patch: |
-          - op: add
-            path: /metadata/labels/istio.io~1use-waypoint
-            value: shared-waypoint
-          - op: add
-            path: /metadata/labels/istio.io~1use-waypoint-namespace
-            value: istio-system
   dependsOn:
   - name: ingress-gateway

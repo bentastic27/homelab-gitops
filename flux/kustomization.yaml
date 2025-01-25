@@ -8,4 +8,5 @@ resources:
 - cpu-requests-remover-webhook
 - openebs
 - charts.yaml
+- helmrepos.yaml
 - blog
