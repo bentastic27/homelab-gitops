@@ -19,8 +19,6 @@ spec:
   values:
     global:
       defaultStorageClass: openebs-hostpath
-    auth:
-      existingSecret: mariadb
     primary:
       resources:
         limits:
