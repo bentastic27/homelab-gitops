@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: test
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: test-base
+  targetNamespace: test
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostname: test.beansnet.net
+    clusterIssuer: letsencrypt-dns-cluster-issuer
+    targetService:
+      name: nginx
+      port: 80
+    authPolicy:
+      allowAll: false
+  dependsOn:
+  - name: ingress-gateway

@@ -9,3 +9,4 @@ resources:
 - openebs
 - charts.yaml
 - helmrepos.yaml
+- test
