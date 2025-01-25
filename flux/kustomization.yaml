@@ -9,4 +9,3 @@ resources:
 - openebs
 - charts.yaml
 - helmrepos.yaml
-- blog
