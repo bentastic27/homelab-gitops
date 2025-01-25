@@ -3,6 +3,6 @@ kind: Namespace
 metadata:
   name: blog
   labels:
-    waypoint-for: all
+    istio.io/waypoint-for: all
     istio.io/use-waypoint: shared-waypoint
     istio.io/use-waypoint-namespace: istio-system
