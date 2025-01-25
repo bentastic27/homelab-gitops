@@ -19,5 +19,9 @@ spec:
   values:
     global:
       defaultStorageClass: openebs-hostpath
+    primary:
+      resources:
+        limits:
+          memory: 512Mi
   dependsOn:
   - name: istiod
