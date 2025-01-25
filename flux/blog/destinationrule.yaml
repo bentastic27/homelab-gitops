@@ -9,6 +9,7 @@ spec:
     portLevelSettings:
       port:
         number: 443
-      tls: SIMPLE
-      # use the self-signed cert from apache
-      insecureSkipVerify: true
+      tls: 
+        mode: SIMPLE
+        # use the self-signed cert from apache
+        insecureSkipVerify: true
