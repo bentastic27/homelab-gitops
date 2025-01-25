@@ -17,6 +17,8 @@ spec:
         name: bitnami
       interval: 5m
   values:
+    service:
+      type: ClusterIP
     ingress:
       enabled: false
     persistence:
