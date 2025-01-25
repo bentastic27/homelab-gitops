@@ -25,14 +25,16 @@ spec:
       enabled: false
     podLabels:
       # apache hates ztunnel for some reason lol
-      istio.io/dataplane-mode: none
+      # istio.io/dataplane-mode: none
+      istio.io/waypoint-for: workload
     persistence:
       storageClass: openebs-hostpath
     mariadb:
       enabled: true
       primary:
         podLabels:
-          istio.io/dataplane-mode: none
+          # istio.io/dataplane-mode: none
+          istio.io/waypoint-for: workload
         resources:
           limits:
             memory: 512Mi
