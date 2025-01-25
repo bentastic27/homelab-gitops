@@ -28,6 +28,8 @@ spec:
     mariadb:
       enabled: true
       primary:
+        podLabels:
+          istio.io/dataplane-mode: none
         resources:
           limits:
             memory: 512Mi
