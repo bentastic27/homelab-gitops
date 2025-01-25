@@ -5,3 +5,4 @@ resources:
 - authpolicy.yaml
 - base-helmrelease.yaml
 - wp-helmrelease.yaml
+- destinationrule.yaml
