@@ -7,12 +7,14 @@ spec:
   selector:
     istio: ingress-gateway
   servers:
-  - name: http
-    hostname: {{ .Values.hostname }}
-    port: 80
-    protocol: HTTP
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - {{ .Values.hostname }}
     tls:
-      httpsRedirect: true
+     httpsRedirect: true
   - port:
       number: 443
       name: https
