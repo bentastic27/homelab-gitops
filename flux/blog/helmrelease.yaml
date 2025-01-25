@@ -30,10 +30,10 @@ spec:
           name: blog
         patch: |
           - op: add
-            path: /metadata/labels/"istio.io/use-waypoint"
+            path: /metadata/labels/istio.io~1use-waypoint
             value: shared-waypoint
           - op: add
-            path: /metadata/labels/"istio.io/use-waypoint-namespace"
+            path: /metadata/labels/istio.io~1use-waypoint-namespace
             value: istio-system
   dependsOn:
   - name: ingress-gateway
