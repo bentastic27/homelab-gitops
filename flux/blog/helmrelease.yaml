@@ -9,7 +9,7 @@ spec:
   releaseName: blog-base
   targetNamespace: blog
   install:
-    createNamespace: true
+    createNamespace: false
   chartRef:
     kind: HelmChart
     name: base-components
