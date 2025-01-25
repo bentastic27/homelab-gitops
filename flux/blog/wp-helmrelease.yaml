@@ -22,7 +22,8 @@ spec:
     persistence:
       storageClass: openebs-hostpath
     mariadb:
-      persistence:
-        storageClass: openebs-hostpath
+      primary:
+        persistence:
+          storageClass: openebs-hostpath
   dependsOn:
   - name: istiod
