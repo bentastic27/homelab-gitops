@@ -25,7 +25,6 @@ spec:
       enabled: false
     podLabels:
       # apache hates ztunnel for some reason lol
-      # istio.io/dataplane-mode: none
       istio.io/waypoint-for: workload
     persistence:
       storageClass: openebs-hostpath
@@ -33,8 +32,8 @@ spec:
       enabled: true
       primary:
         podLabels:
-          # istio.io/dataplane-mode: none
-          istio.io/waypoint-for: workload
+          # mysql hates ztunnel for some reason lol
+          istio.io/dataplane-mode: none
         resources:
           limits:
             memory: 512Mi
