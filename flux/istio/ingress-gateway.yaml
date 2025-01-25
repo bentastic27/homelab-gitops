@@ -26,6 +26,7 @@ spec:
       sidecar.istio.io/interceptionMode: TPROXY
     service:
       type: NodePort
+      externalTrafficPolicy: Local
       ports:
       - name: status-port
         port: 15021
