@@ -17,16 +17,20 @@ spec:
         name: bitnami
       interval: 5m
   values:
+    global:
+      defaultStorageClass: openebs-hostpath
     service:
       type: ClusterIP
     ingress:
       enabled: false
     persistence:
       storageClass: openebs-hostpath
-    externalDatabase:
-      host: mariadb.blog.svc.cluster.local
-      existingSecret: mariadb
-      user: root
+    mariadb:
+      enabled: true
+      primary:
+        resources:
+          limits:
+            memory: 512Mi
   dependsOn:
   - name: istiod
   - name: blog-mariadb
