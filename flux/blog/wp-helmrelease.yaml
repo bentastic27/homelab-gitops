@@ -1,31 +1,31 @@
-# apiVersion: helm.toolkit.fluxcd.io/v2
-# kind: HelmRelease
-# metadata:
-#   name: blog-wp
-#   namespace: flux
-# spec:
-#   interval: 10m
-#   timeout: 5m
-#   releaseName: wordpress
-#   targetNamespace: blog
-#   chart:
-#     spec:
-#       chart: wordpress
-#       version: '24.1.7'
-#       sourceRef:
-#         kind: HelmRepository
-#         name: bitnami
-#       interval: 5m
-#   values:
-#     service:
-#       type: ClusterIP
-#     ingress:
-#       enabled: false
-#     persistence:
-#       storageClass: openebs-hostpath
-#     mariadb:
-#       primary:
-#         persistence:
-#           storageClass: openebs-hostpath
-#   dependsOn:
-#   - name: istiod
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: blog-wp
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: wordpress
+  targetNamespace: blog
+  chart:
+    spec:
+      chart: wordpress
+      version: '24.1.7'
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+      interval: 5m
+  values:
+    service:
+      type: ClusterIP
+    ingress:
+      enabled: false
+    persistence:
+      storageClass: openebs-hostpath
+    externalDatabase:
+      host: mariadb.blog.svc.cluster.local
+      existingSecret: mariadb
+      user: root
+  dependsOn:
+  - name: istiod
