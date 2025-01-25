@@ -23,6 +23,8 @@ spec:
       type: ClusterIP
     ingress:
       enabled: false
+    podLabels:
+      istio.io/dataplane-mode: none
     persistence:
       storageClass: openebs-hostpath
     mariadb:
