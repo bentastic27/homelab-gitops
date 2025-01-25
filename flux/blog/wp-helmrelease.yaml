@@ -29,3 +29,4 @@ spec:
       user: root
   dependsOn:
   - name: istiod
+  - name: blog-mariadb
