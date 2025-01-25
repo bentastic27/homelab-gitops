@@ -24,6 +24,7 @@ spec:
     ingress:
       enabled: false
     podLabels:
+      # apache hates ztunnel for some reason lol
       istio.io/dataplane-mode: none
     persistence:
       storageClass: openebs-hostpath
