@@ -27,6 +27,7 @@ spec:
             cpu: 2000m
             memory: 1024Mi
     meshConfig:
+      accessLogFile: /dev/stdout
       gatewayTopology:
         numTrustedProxies: 2
   dependsOn:
