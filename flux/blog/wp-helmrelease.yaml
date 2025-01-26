@@ -17,6 +17,7 @@ spec:
         name: bitnami
       interval: 5m
   values:
+    wordpressConfigureCache: true
     global:
       defaultStorageClass: openebs-hostpath
     service:
