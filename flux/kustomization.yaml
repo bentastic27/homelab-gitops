@@ -10,4 +10,4 @@ resources:
 - charts.yaml
 - helmrepos.yaml
 - test
-- blog
+- wp

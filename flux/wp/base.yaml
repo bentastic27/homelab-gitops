@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wp-base
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: wp-base
+  targetNamespace: wordpress
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostname: wp.beansnet.net
+    clusterIssuer: letsencrypt-dns-cluster-issuer
+    targetService:
+      name: wordpress
+      port: 80
+    authPolicy:
+      allowAll: false
+  dependsOn:
+  - name: ingress-gateway
