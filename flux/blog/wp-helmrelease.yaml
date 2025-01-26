@@ -23,17 +23,11 @@ spec:
       type: ClusterIP
     ingress:
       enabled: false
-    podLabels:
-      # apache hates ztunnel for some reason lol
-      istio.io/dataplane-mode: none
-    persistence:
-      storageClass: openebs-hostpath
+    memcached:
+      enabled: true
     mariadb:
       enabled: true
       primary:
-        podLabels:
-          # mysql hates ztunnel for some reason lol
-          istio.io/dataplane-mode: none
         resources:
           limits:
             memory: 512Mi
