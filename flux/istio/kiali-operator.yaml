@@ -29,5 +29,8 @@ spec:
       external_services:
         prometheus:
           url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090/
+        grafana:
+          enabled: true
+          internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
   dependsOn:
   - name: istiod
