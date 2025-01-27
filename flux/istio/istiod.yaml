@@ -29,7 +29,8 @@ spec:
     meshConfig:
       accessLogFile: /dev/stdout
       defaultConfig:
+        interceptionMode: TPROXY
         gatewayTopology:
-          numTrustedProxies: 1
+          proxyProtocol: {}
   dependsOn:
   - name: istio-base
