@@ -19,6 +19,7 @@ spec:
     profile: ambient
     service:
       type: NodePort
+      externalTrafficPolicy: Local
       ports:
       - name: status-port
         port: 15021
