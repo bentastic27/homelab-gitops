@@ -27,4 +27,4 @@ spec:
         deployment:
           view_only_mode: true
   dependsOn:
-  - name: istio-base
+  - name: istiod
