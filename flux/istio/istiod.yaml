@@ -28,7 +28,8 @@ spec:
             memory: 1024Mi
     meshConfig:
       accessLogFile: /dev/stdout
-      gatewayTopology:
-        numTrustedProxies: 2
+      defaultConfig:
+        gatewayTopology:
+          numTrustedProxies: 1
   dependsOn:
   - name: istio-base
