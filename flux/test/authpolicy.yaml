@@ -7,5 +7,5 @@ spec:
   rules:
   - from:
     - source:
-        ipBlocks:
-        - "50.4.72.65"
+        principals:
+        - cluster.local/ns/istio-system/sa/ingress-gateway
