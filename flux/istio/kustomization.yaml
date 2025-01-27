@@ -8,3 +8,4 @@ resources:
 - ztunnel.yaml
 - ingress-gateway.yaml
 - manifests.yaml
+- kiali-operator.yaml
