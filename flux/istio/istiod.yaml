@@ -30,8 +30,8 @@ spec:
       accessLogFile: /dev/stdout
       defaultConfig:
         interceptionMode: TPROXY
-        numTrustedProxies: 1
         gatewayTopology:
+          numTrustedProxies: 1
           proxyProtocol: {}
   dependsOn:
   - name: istio-base
