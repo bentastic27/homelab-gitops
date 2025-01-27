@@ -30,6 +30,7 @@ spec:
       accessLogFile: /dev/stdout
       defaultConfig:
         interceptionMode: TPROXY
+        numTrustedProxies: 1
         gatewayTopology:
           proxyProtocol: {}
   dependsOn:
