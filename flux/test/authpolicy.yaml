@@ -9,3 +9,5 @@ spec:
     - source:
         principals:
         - cluster.local/ns/istio-system/sa/ingress-gateway
+        notIpBlocks:
+        - "50.4.72.65"
