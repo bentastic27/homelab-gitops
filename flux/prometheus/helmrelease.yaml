@@ -18,5 +18,8 @@ spec:
         kind: HelmRepository
         name: prometheus
       interval: 5m
+  values:
+    alertmanager:
+      enabled: false
   dependsOn:
   - name: istiod
