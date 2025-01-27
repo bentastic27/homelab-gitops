@@ -26,5 +26,8 @@ spec:
           strategy: anonymous
         deployment:
           view_only_mode: true
+      external_services:
+        prometheus:
+          url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090/
   dependsOn:
   - name: istiod
