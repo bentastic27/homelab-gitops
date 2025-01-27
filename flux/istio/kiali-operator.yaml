@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kiali-operator
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: kiali-operator
+  targetNamespace: kiali-operator
+  install:
+    createNamespace: true
+  chart:
+    spec:
+      chart: kiali-operator
+      version: '1.24.2'
+      sourceRef:
+        kind: HelmRepository
+        name: kiali-operator
+  values:
+    cr:
+      create: true
+      namespace: istio-system
+      spec:
+        auth:
+          strategy: anonymous
+        deployment:
+          view_only_mode: true
+  dependsOn:
+  - name: istio-base
