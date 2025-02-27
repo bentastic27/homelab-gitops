@@ -6,3 +6,5 @@ resources:
 - deploy.yaml
 - service.yaml
 - authpolicy.yaml
+- networkpolicy.yaml
+- serviceentries.yaml

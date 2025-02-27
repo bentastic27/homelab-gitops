@@ -7,6 +7,5 @@ resources:
 - istiod.yaml
 - ztunnel.yaml
 - ingress-gateway.yaml
-- egress-gateway.yaml
 - manifests.yaml
 - kiali-operator.yaml
