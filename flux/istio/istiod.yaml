@@ -17,6 +17,8 @@ spec:
         name: istio
   values:
     profile: ambient
+    env:
+      PILOT_ENABLE_IP_AUTOALLOCATE: "true"
     global:
       proxy:
         resources:
