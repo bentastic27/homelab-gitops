@@ -1,0 +1,79 @@
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: external-svc-https
+  namespace: test
+spec:
+  hosts:
+  - www.google.com
+  ports:
+  - number: 443
+    name: https
+    protocol: TLS
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1
+kind: Gateway
+metadata:
+  name: google
+  namespace: test
+spec:
+  selector:
+    istio: egress-gateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - www.google.com
+    tls:
+      mode: PASSTHROUGH
+---
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: egressgateway-for-google
+  namespace: test
+spec:
+  host: egress-gateway.istio-system.svc.cluster.local
+  subsets:
+  - name: google
+---
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: direct-google-through-egress-gateway
+  namespace: test
+spec:
+  hosts:
+  - www.google.com
+  gateways:
+  - google
+  - mesh
+  tls:
+  - match:
+    - gateways:
+      - mesh
+      port: 443
+      sniHosts:
+      - www.google.com
+    route:
+    - destination:
+        host: egress-gateway.istio-system.svc.cluster.local
+        subset: google
+        port:
+          number: 443
+      weight: 100
+  - match:
+    - gateways:
+      - google
+      port: 443
+      sniHosts:
+      - www.google.com
+    route:
+    - destination:
+        host: www.google.com
+        port:
+          number: 443
+      weight: 100

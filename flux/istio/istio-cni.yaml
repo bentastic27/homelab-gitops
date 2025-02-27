@@ -17,6 +17,9 @@ spec:
         name: istio
   values:
     profile: ambient
+    ambient:
+      enabled: true
+      dnsCapture: true
   dependsOn:
   - name: istio-base
   - name: istiod

@@ -33,5 +33,8 @@ spec:
         gatewayTopology:
           numTrustedProxies: 1
           proxyProtocol: {}
+        proxyMetadata:
+          ISTIO_META_DNS_CAPTURE: "true"
+          PILOT_ENABLE_IP_AUTOALLOCATE: "true"
   dependsOn:
   - name: istio-base
