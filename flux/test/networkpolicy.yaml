@@ -14,7 +14,7 @@ spec:
           kubernetes.io/metadata.name: istio-system
       podSelector:
         matchLabels:
-          istio: egress-gateway
+          gateway.networking.k8s.io/gateway-name: shared-waypoint
   - to:
     - namespaceSelector:
         matchLabels:
