@@ -11,4 +11,34 @@ spec:
     name: https
     protocol: TLS
   resolution: DNS
-
+---
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: debian
+  namespace: test
+spec:
+  hosts:
+  - deb.debian.org
+  ports:
+  - number: 443
+    name: https
+    protocol: TLS
+  - number: 80
+    name: http
+    protocol: HTTP
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: tcpbin
+  namespace: test
+spec:
+  hosts:
+  - tcpbin.com
+  ports:
+  - number: 4242
+    name: tcp
+    protocol: TCP
+  resolution: DNS
