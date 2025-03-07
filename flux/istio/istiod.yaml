@@ -33,7 +33,7 @@ spec:
       defaultConfig:
         interceptionMode: TPROXY
         gatewayTopology:
-          numTrustedProxies: 1
+          numTrustedProxies: 2
           proxyProtocol: {}
         proxyMetadata:
           ISTIO_META_DNS_CAPTURE: "true"
