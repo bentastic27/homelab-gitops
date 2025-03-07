@@ -4,7 +4,7 @@ resources:
 - flux
 - prometheus
 - cert-manager
-- istio
+# - istio
 - ddns-route53
 - cpu-requests-remover-webhook
 - openebs
