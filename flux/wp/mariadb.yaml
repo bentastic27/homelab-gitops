@@ -21,8 +21,8 @@ spec:
       database: wordpress
     global:
       defaultStorageClass: openebs-hostpath
-    # commonLabels:
-    #   istio.io/dataplane-mode: none
+    commonLabels:
+      istio.io/dataplane-mode: none
     primary:
       resources:
         limits:
