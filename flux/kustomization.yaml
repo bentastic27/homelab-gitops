@@ -9,6 +9,6 @@ resources:
 - openebs
 - charts.yaml
 - helmrepos.yaml
-# - istio
+- istio-kustomization
 # - test
 # - wp
