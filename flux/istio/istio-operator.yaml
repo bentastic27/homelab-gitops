@@ -9,7 +9,6 @@ spec:
       interceptionMode: TPROXY
       gatewayTopology:
         numTrustedProxies: 2
-        proxyProtocol: {}
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         PILOT_ENABLE_IP_AUTOALLOCATE: "true"
