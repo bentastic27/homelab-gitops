@@ -19,7 +19,7 @@ metadata:
   name: gateway
   namespace: istio-system
   annotations:
-    networking.istio.io/service-type: ClusterIP
+    networking.istio.io/service-type: LoadBalancer
     metallb.universe.tf/address-pool: host-ip
 spec:
   gatewayClassName: istio
