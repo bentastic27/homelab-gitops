@@ -5,4 +5,4 @@ metadata:
   namespace: flux
 spec:
   interval: 10m0s
-  url: ttps://metallb.github.io/metallb
+  url: https://metallb.github.io/metallb
