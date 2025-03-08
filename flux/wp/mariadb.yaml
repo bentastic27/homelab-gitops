@@ -27,5 +27,3 @@ spec:
       resources:
         limits:
           memory: 512Mi
-  dependsOn:
-  - name: istiod

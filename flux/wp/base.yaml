@@ -21,3 +21,5 @@ spec:
       port: 80
     authPolicy:
       allowAll: false
+  dependsOn:
+  - name: cert-manager

@@ -16,5 +16,3 @@ spec:
         kind: HelmRepository
         name: bitnami
       interval: 5m
-  dependsOn:
-  - name: istiod
