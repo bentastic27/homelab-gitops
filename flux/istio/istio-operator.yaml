@@ -39,10 +39,10 @@ spec:
           - kind: Deployment
             name: ingressgateway
             patches:
-              - path: kind
-                value: DaemonSet
-              - path: spec.strategy
-                value: null
+            - path: kind
+              value: DaemonSet
+            - path: spec.strategy
+              value: null
   values:
     pilot:
       env:
