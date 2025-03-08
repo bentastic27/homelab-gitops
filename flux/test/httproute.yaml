@@ -9,6 +9,27 @@ spec:
     namespace: istio-system
     group: gateway.networking.k8s.io
     kind: Gateway
+    sectionName: wildcard-http
+  hostnames: ["lab.beansnet.net"]
+  rules:
+  - filters:
+    - type: RequestRedirect
+      requestRedirect:
+        scheme: https
+        statusCode: 301
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: test-https
+  namespace: test
+spec:
+  parentRefs:
+  - name: gateway
+    namespace: istio-system
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    sectionName: wildcard-https
   hostnames: ["lab.beansnet.net"]
   rules:
   - matches:
