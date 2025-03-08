@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
 - helmrepo.yaml
 - helmrelease.yaml
-- manifets-kustomization.yaml
+- manifests-kustomization.yaml
