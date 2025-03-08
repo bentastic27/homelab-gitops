@@ -10,5 +10,6 @@ resources:
 - charts.yaml
 - helmrepos.yaml
 - istio-kustomization.yaml
+- metallb
 # - test
 # - wp
