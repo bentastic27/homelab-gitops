@@ -12,3 +12,7 @@ spec:
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         PILOT_ENABLE_IP_AUTOALLOCATE: "true"
+  components:
+    ingressGateways:
+      - name: ingressgateway
+        enabled: false

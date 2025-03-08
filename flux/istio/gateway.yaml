@@ -42,6 +42,9 @@ spec:
     protocol: HTTPS
     port: 8443
     hostname: "beansnet.net"
+    allowedRoutes:
+      namespaces:
+        from: All
     tls:
       mode: Terminate
       certificateRefs:
@@ -52,6 +55,9 @@ spec:
     protocol: HTTPS
     port: 8443
     hostname: "*.beansnet.net"
+    allowedRoutes:
+      namespaces:
+        from: All
     tls:
       mode: Terminate
       certificateRefs:
