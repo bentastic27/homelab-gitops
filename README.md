@@ -7,6 +7,7 @@
 ```
 tls-san:
 - lab.beansnet.net
+- remotek8s.beansnet.net
 - "192.168.1.10"
 disable: rke2-ingress-nginx
 disable-cloud-controller: true
@@ -15,6 +16,8 @@ disable-cloud-controller: true
 ## Init
 
 ```
+istioctl install -f flux/istio/istio-operator.yaml
+
 kubectl create ns flux
 
 # init cert manager IAM
