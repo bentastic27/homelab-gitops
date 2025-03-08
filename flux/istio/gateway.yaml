@@ -20,26 +20,27 @@ metadata:
   namespace: istio-system
   annotations:
     networking.istio.io/service-type: ClusterIP
+    metallb.universe.tf/address-pool: host-ip
 spec:
   gatewayClassName: istio
   listeners:
   - name: base-http
     hostname: "beansnet.net"
-    port: 80
+    port: 8080
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
   - name: wildcard-http
     hostname: "*.beansnet.net"
-    port: 80
+    port: 8080
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
   - name: base-https
     protocol: HTTPS
-    port: 443
+    port: 8443
     hostname: "beansnet.net"
     tls:
       mode: Terminate
@@ -49,7 +50,7 @@ spec:
         name: beansnet-cert
   - name: wildcard-https
     protocol: HTTPS
-    port: 443
+    port: 8443
     hostname: "*.beansnet.net"
     tls:
       mode: Terminate
@@ -57,24 +58,3 @@ spec:
       - kind: Secret
         group: ""
         name: beansnet-cert
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: gateway-lb
-  namespace: istio-system
-  annotations:
-    metallb.universe.tf/address-pool: host-ip
-spec:
-  type: LoadBalancer
-  selector:
-    gateway.networking.k8s.io/gateway-name: gateway
-  ports:
-  - name: http
-    protocol: TCP
-    port: 80
-    targetPort: 80
-  - name: https
-    protocol: TCP
-    port: 443
-    targetPort: 443
