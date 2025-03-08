@@ -1,28 +1,15 @@
 apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: heh
-  namespace: test
-spec:
-  gatewayClassName: istio
-  listeners:
-  - name: http
-    hostname: "test.beansnet.net"
-    port: 8080
-    protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: All
----
-apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: test
   namespace: test
 spec:
   parentRefs:
-  - name: heh
-  hostnames: ["test.beansnet.net"]
+  - name: gateway
+    namespace: istio-system
+    group: gateway.networking.k8s.io
+    kind: Gateway
+  hostnames: ["lab.beansnet.net"]
   rules:
   - matches:
     - path:

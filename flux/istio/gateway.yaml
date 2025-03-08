@@ -1,0 +1,80 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: beansnet
+  namespace: istio-system
+spec:
+  secretName: beansnet-cert
+  commonName: beansnet.net
+  dnsNames:
+  - beansnet.net
+  - "*.beansnet.net"
+  issuerRef:
+    name: letsencrypt-dns-cluster-issuer
+    kind: ClusterIssuer
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: gateway
+  namespace: istio-system
+  annotations:
+    networking.istio.io/service-type: ClusterIP
+spec:
+  gatewayClassName: istio
+  listeners:
+  - name: base-http
+    hostname: "beansnet.net"
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: wildcard-http
+    hostname: "*.beansnet.net"
+    port: 80
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: base-https
+    protocol: HTTPS
+    port: 443
+    hostname: "beansnet.net"
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ""
+        name: beansnet-cert
+  - name: wildcard-https
+    protocol: HTTPS
+    port: 443
+    hostname: "*.beansnet.net"
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ""
+        name: beansnet-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-to-gtw
+  namespace: istio-system
+spec:
+  type: NodePort
+  selector:
+    gateway.networking.k8s.io/gateway-name: gateway
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30080
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 443
+    nodePort: 30443

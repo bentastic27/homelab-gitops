@@ -13,27 +13,3 @@ spec:
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         PILOT_ENABLE_IP_AUTOALLOCATE: "true"
-  components:
-    ingressGateways:
-    - name: ingressgateway
-      enabled: true
-      k8s:
-        service:
-          type: NodePort
-          externalTrafficPolicy: Local
-          ports:
-          - name: status-port
-            nodePort: 30021
-            port: 15021
-            protocol: TCP
-            targetPort: 15021
-          - name: http2
-            nodePort: 30080
-            port: 8080
-            protocol: TCP
-            targetPort: 8080
-          - name: https
-            nodePort: 30443
-            port: 8443
-            protocol: TCP
-            targetPort: 8443
