@@ -16,3 +16,13 @@ spec:
     ingressGateways:
       - name: ingressgateway
         enabled: false
+  values:
+    global:
+      proxy:
+        resources:
+          requests:
+            cpu: "0"
+            memory: "0"
+          limits:
+            cpu: 2000m
+            memory: 1024Mi
