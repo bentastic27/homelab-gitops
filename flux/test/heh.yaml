@@ -1,15 +1,33 @@
-apiVersion: networking.istio.io/v1
+apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
   name: heh
   namespace: test
 spec:
-  selector:
-    istio: ingressgateway
-  servers:
-  - hosts:
-    - "*"
-    port:
-      name: http
-      number: 30080
-      protocol: HTTP
+  gatewayClassName: istio
+  listeners:
+  - name: http
+    hostname: "test.beansnet.net"
+    port: 8080
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: test
+  namespace: test
+spec:
+  parentRefs:
+  - name: heh
+  hostnames: ["test.beansnet.net"]
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    backendRefs:
+    - name: nginx
+      port: 80
