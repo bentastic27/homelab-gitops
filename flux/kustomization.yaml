@@ -9,5 +9,6 @@ resources:
 - openebs
 - charts.yaml
 - helmrepos.yaml
-- test
+- istio
+# - test
 # - wp
