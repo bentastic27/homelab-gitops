@@ -10,7 +10,7 @@ spec:
     group: gateway.networking.k8s.io
     kind: Gateway
     sectionName: wildcard-http
-  hostnames: ["lab.beansnet.net"]
+  hostnames: ["test.beansnet.net"]
   rules:
   - filters:
     - type: RequestRedirect
@@ -30,7 +30,7 @@ spec:
     group: gateway.networking.k8s.io
     kind: Gateway
     sectionName: wildcard-https
-  hostnames: ["lab.beansnet.net"]
+  hostnames: ["test.beansnet.net"]
   rules:
   - matches:
     - path:
