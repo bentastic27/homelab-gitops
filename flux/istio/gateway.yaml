@@ -26,21 +26,21 @@ spec:
   listeners:
   - name: base-http
     hostname: "beansnet.net"
-    port: 80
+    port: 8080
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
   - name: wildcard-http
     hostname: "*.beansnet.net"
-    port: 80
+    port: 8080
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
   - name: base-https
     protocol: HTTPS
-    port: 443
+    port: 8443
     hostname: "beansnet.net"
     allowedRoutes:
       namespaces:
@@ -53,7 +53,7 @@ spec:
         name: beansnet-cert
   - name: wildcard-https
     protocol: HTTPS
-    port: 443
+    port: 8443
     hostname: "*.beansnet.net"
     allowedRoutes:
       namespaces:
