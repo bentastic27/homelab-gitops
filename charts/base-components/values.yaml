@@ -1,7 +1,21 @@
-hostname: example.com
+hostnames:
+- example.com
 clusterIssuer: letsencrypt-dns-cluster-issuer
 targetService:
   name: some-service
   port: 80
 authPolicy:
   allowAll: false
+parentRefs:
+  http:
+  - name: gateway
+    namespace: istio-system
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    sectionName: wildcard-http
+  https:
+  - name: gateway
+    namespace: istio-system
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    sectionName: wildcard-http
