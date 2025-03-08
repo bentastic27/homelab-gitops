@@ -32,5 +32,3 @@ spec:
           grafana:
             enabled: true
             internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
-  dependsOn:
-  - name: istiod
