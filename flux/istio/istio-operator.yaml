@@ -15,12 +15,11 @@ spec:
   components:
     ingressGateways:
       - name: ingressgateway
-        enabled: enabled
+        enabled: true
         k8s:
           service:
             externalTrafficPolicy: Local
-            annotations:
-              metallb.universe.tf/address-pool: host-ip
+            type: NodePort
             ports:
             - name: status-port
               port: 15021
@@ -28,14 +27,22 @@ spec:
               targetPort: 15021
             - name: http2
               nodePort: 30080
-              port: 80
+              port: 8080
               protocol: TCP
-              targetPort: 80
+              targetPort: 8080
             - name: https
               nodePort: 30443
-              port: 443
+              port: 8443
               protocol: TCP
-              targetPort: 443
+              targetPort: 8443
+          overlays:
+          - kind: Deployment
+            name: ingressgateway
+            patches:
+              - path: kind
+                value: DaemonSet
+              - path: spec.strategy
+                value: null
   values:
     pilot:
       env:
