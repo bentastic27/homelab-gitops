@@ -1,7 +1,7 @@
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 spec:
-  profile: ambient
+  profile: default
   meshConfig:
     accessLogFile: /dev/stdout
     enableTracing: true
