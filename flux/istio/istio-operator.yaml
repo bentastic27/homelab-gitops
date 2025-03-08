@@ -8,7 +8,7 @@ spec:
     defaultConfig:
       interceptionMode: TPROXY
       gatewayTopology:
-        numTrustedProxies: 2
+        numTrustedProxies: 0
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         PILOT_ENABLE_IP_AUTOALLOCATE: "true"
