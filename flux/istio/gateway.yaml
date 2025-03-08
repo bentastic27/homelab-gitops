@@ -61,10 +61,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nodeport-to-gtw
+  name: gateway-lb
   namespace: istio-system
+  annotations:
+    metallb.universe.tf/address-pool: host-ip
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     gateway.networking.k8s.io/gateway-name: gateway
   ports:
