@@ -44,6 +44,8 @@ spec:
           value: root
         - name: WORDPRESS_DATABASE_NAME
           value: wordpress
+        - name: WORDPRESS_EXTRA_WP_CONFIG_CONTENT
+          value: "define('WP_CACHE', true);"
         - name: WORDPRESS_DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
