@@ -34,7 +34,7 @@ spec:
       - name: wordpress
         image: bitnami/wordpress:6.7.2
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         env:
         - name: MARIADB_HOST
           value: mariadb.wordpress.svc.cluster.local
@@ -65,6 +65,7 @@ metadata:
 spec:
   ports:
   - port: 80
+    targetPort: 8080
     protocol: TCP
   selector:
     app: wordpress
