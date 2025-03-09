@@ -13,3 +13,7 @@ spec:
     - source:
         namespaces:
         - wordpress
+  - to:
+    - source:
+        namespace:
+        - wordpress
