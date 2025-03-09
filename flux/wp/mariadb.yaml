@@ -21,24 +21,9 @@ spec:
       database: wordpress
     global:
       defaultStorageClass: openebs-hostpath
-    # commonLabels:
-    #   sidecar.istio.io/inject: "false"
+    commonLabels:
+      sidecar.istio.io/inject: "false"
     primary:
       resources:
         limits:
           memory: 512Mi
----
-apiVersion: security.istio.io/v1
-kind: PeerAuthentication
-metadata:
-  name: mariadb
-  namespace: wordpress
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: mariadb
-  mtls:
-    mode: STRICT
-  portLevelMtls:
-    3306:
-      mode: DISABLE

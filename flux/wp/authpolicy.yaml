@@ -9,6 +9,7 @@ spec:
     - source:
         principals:
         - cluster.local/ns/istio-system/sa/ingressgateway-service-account
+  - from:
     - source:
         namespaces:
         - wordpress
