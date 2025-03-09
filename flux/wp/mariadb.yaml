@@ -27,18 +27,3 @@ spec:
           memory: 512Mi
     networkPolicy:
       enabled: false
----
-apiVersion: security.istio.io/v1
-kind: PeerAuthentication
-metadata:
-  name: mariadb
-  namespace: wordpress
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/instance: mariadb
-  mtls:
-    mode: STRICT
-  portLevelMtls:
-    3306:
-      mode: DISABLE
