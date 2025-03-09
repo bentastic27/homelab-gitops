@@ -27,6 +27,8 @@ spec:
         traffic.sidecar.istio.io/excludeOutboundPorts: "3306"
       labels:
         app: wordpress
+        mariadb-client: "true"
+        memcached-client: "true"
     spec:
       containers:
       - name: wordpress
