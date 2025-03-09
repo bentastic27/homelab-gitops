@@ -17,4 +17,4 @@ parentRefs:
     namespace: istio-system
     group: gateway.networking.k8s.io
     kind: Gateway
-    sectionName: wildcard-http
+    sectionName: wildcard-https
