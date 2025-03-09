@@ -18,6 +18,4 @@ spec:
       interval: 5m
   values:
     networkPolicy:
-      enabled: true
-      allowExternal: false
-      allowExternalEgress: false
+      enabled: false

@@ -26,9 +26,7 @@ spec:
         limits:
           memory: 512Mi
     networkPolicy:
-      enabled: true
-      allowExternal: false
-      allowExternalEgress: false
+      enabled: false
 ---
 apiVersion: security.istio.io/v1
 kind: PeerAuthentication
