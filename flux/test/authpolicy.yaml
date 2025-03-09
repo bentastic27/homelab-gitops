@@ -8,5 +8,4 @@ spec:
   - from:
     - source:
         principals:
-        - cluster.local/ns/istio-system/sa/ingress-gateway
-  - to: []
+        - cluster.local/ns/istio-system/sa/ingressgateway-service-account

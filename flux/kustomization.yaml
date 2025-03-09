@@ -10,5 +10,5 @@ resources:
 - charts.yaml
 - helmrepos.yaml
 - istio-kustomization.yaml
+- wp
 # - test
-# - wp

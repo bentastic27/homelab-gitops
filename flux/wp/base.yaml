@@ -14,12 +14,10 @@ spec:
     kind: HelmChart
     name: base-components
   values:
-    hostname: wp.beansnet.net
-    clusterIssuer: letsencrypt-dns-cluster-issuer
+    hostnames:
+    - wp.beansnet.net
     targetService:
       name: wordpress
       port: 80
-    authPolicy:
-      allowAll: false
   dependsOn:
   - name: cert-manager

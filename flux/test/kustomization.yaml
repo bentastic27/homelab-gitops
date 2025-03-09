@@ -5,6 +5,6 @@ resources:
 # - base-helmrelease.yaml
 - deploy.yaml
 - service.yaml
-- authpolicy.yaml
+# - authpolicy.yaml
 # - networkpolicy.yaml
-- serviceentries.yaml
+# - serviceentries.yaml
