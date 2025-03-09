@@ -1,10 +1,9 @@
 hostnames:
 - example.com
-clusterIssuer: letsencrypt-dns-cluster-issuer
 targetService:
   name: some-service
   port: 80
-authPolicy:
+authPolicy: # todo
   allowAll: false
 parentRefs:
   http:
