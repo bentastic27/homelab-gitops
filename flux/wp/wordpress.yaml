@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: wordpress
-        image: wordpress:6.7.1-php8.1-apache
+        image: wordpress:6.7.2-php8.1-apache
         ports:
         - containerPort: 80
         env:
