@@ -2,4 +2,4 @@ apiVersion: v2
 name: base-components
 description: A chart to create auxiliary components for istio/k8s
 type: application
-version: 0.0.4
+version: 0.0.5
