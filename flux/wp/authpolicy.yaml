@@ -1,14 +1,21 @@
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
- name: allow
+ name: deny-ap-admin
  namespace: wordpress
 spec:
+  action: DENY
+  selector:
+    matchLabels:
+      app: wordpress
   rules:
   - from:
     - source:
-        principals:
-        - cluster.local/ns/istio-system/sa/ingressgateway-service-account
-    - source:
-        namespaces:
-        - wordpress
+        notRemoteIpBlocks:
+        - "50.4.72.65"
+    to:
+    - operation:
+        paths:
+        - "/wp-admin*"
+        ports:
+        - "80"
