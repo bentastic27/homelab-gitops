@@ -22,7 +22,7 @@ spec:
     global:
       defaultStorageClass: openebs-hostpath
     commonLabels:
-      idecar.istio.io/inject: "false"
+      sidecar.istio.io/inject: "false"
     primary:
       resources:
         limits:
