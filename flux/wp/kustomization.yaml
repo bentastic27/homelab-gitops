@@ -7,4 +7,3 @@ resources:
 - mariadb.yaml
 - memcached.yaml
 - wordpress.yaml
-- peerauthentications.yaml
