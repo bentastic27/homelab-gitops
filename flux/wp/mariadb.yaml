@@ -27,3 +27,7 @@ spec:
       resources:
         limits:
           memory: 512Mi
+    networkPolicy:
+      enabled: true
+      allowExternal: false
+      allowExternalEgress: false
