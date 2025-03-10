@@ -12,7 +12,7 @@ spec:
   - from:
     - source:
         notRemoteIpBlocks:
-        - "50.4.72.65"
+        - "${publicIp:=0.0.0.0/0}"
     to:
     - operation:
         paths:
