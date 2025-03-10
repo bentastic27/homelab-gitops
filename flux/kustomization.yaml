@@ -11,4 +11,4 @@ resources:
 - helmrepos.yaml
 - istio-kustomization.yaml
 - wp-kustomization.yaml
-# - test
+- public-ip-configmapper

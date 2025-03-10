@@ -1,0 +1,30 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: public-ip-configmapper
+  namespace: flux
+rules:
+- apiGroups: [""]
+  resources: ["configmaps"]
+  resourceNames: ["common-configs"]
+  verbs: ["update", "get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: public-ip-configmapper
+  namespace: flux
+subjects:
+- kind: ServiceAccount
+  name: public-ip-configmapper
+  namespace: flux
+roleRef:
+  kind: Role
+  name: public-ip-configmapper
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: public-ip-configmapper
+  namespace: flux
