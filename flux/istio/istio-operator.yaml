@@ -13,6 +13,9 @@ spec:
         ISTIO_META_DNS_CAPTURE: "true"
         PILOT_ENABLE_IP_AUTOALLOCATE: "true"
   components:
+    cni:
+      namespace: istio-system
+      enabled: true
     ingressGateways:
       - name: ingressgateway
         enabled: true
