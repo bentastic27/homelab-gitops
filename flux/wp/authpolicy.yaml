@@ -1,7 +1,7 @@
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
- name: deny-ap-admin
+ name: deny-wp-admin
  namespace: wordpress
 spec:
   action: DENY
