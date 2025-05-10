@@ -123,9 +123,9 @@ spec:
   - port: 19132
     protocol: UDP
     name: bedrock
-    nodePort: 39132
+    nodePort: 30132
   - port: 25565
     protocol: TCP
     name: java
-    nodePort: 35565
+    nodePort: 30565
   type: NodePort
