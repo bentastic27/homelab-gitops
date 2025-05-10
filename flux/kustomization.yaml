@@ -12,3 +12,4 @@ resources:
 - istio-kustomization.yaml
 - wp-kustomization.yaml
 - public-ip-configmapper
+- minecraft
