@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bedrockconnect
+  namespace: minecraft
+  labels:
+    app: minecraft
+data:
+  custom_servers.json: |
+    [
+      {
+        "name": "some-server-dont-use",
+        "iconUrl": "https://i.imgur.com/3BmFZRE.png",
+        "address": "192.168.1.10",
+        "port": 30132
+      }
+    ]
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bedrockconnect
+  name: bedrockconnect
+  namespace: minecraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bedrockconnect
+  template:
+    metadata:
+      labels:
+        app: bedrockconnect
+    spec:
+      containers:
+        - name: main
+          image: openjdk:25
+          command: ["/bin/sh"]
+          args:
+          - -c
+          - |
+            curl -L -o BedrockConnect-1.0-SNAPSHOT.jar https://github.com/Pugmatt/BedrockConnect/releases/download/1.55/BedrockConnect-1.0-SNAPSHOT.jar
+            java -Xms512M -Xmx512M -jar BedrockConnect-1.0-SNAPSHOT.jar nodb=true custom_servers=/app/custom_servers.json
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 1Gi
+          volumeMounts:
+          - name: configs
+            mountPath: "/app"
+            readOnly: true
+          ports:
+          - containerPort: 19132
+            hostPort: 19132
+            protocol: UDP
+            name: bedrock
+      volumes:
+      - name: configs
+        configMap:
+          name: bedrockconnect
+          items:
+          - key: "custom_servers.json"
+            path: "custom_servers.json"

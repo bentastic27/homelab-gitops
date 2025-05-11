@@ -6,7 +6,7 @@ metadata:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: minecraft-bedrock
+  name: minecraft
   namespace: minecraft
   labels:
     app: minecraft
@@ -83,7 +83,7 @@ spec:
               cpu: 2
           envFrom:
           - configMapRef:
-              name: minecraft-bedrock
+              name: minecraft
           volumeMounts:
           - mountPath: /data
             name: data
