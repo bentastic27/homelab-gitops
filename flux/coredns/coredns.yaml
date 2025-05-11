@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: coredns
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: coredns
+data:
+  Corefile: |
+    . {
+      errors
+      health {
+          lameduck 5s
+      }
+      ready
+      hosts /etc/coredns/Hosts {
+        fallthrough
+      }
+      forward . 8.8.8.8:53 {
+        max_concurrent 1000
+      }
+      cache 30
+      loop
+      reload
+      loadbalance
+    }
+  Hosts: |
+    192.168.1.10 geo.hivebedrock.network
+    192.168.1.10 hivebedrock.network
+    192.168.1.10 play.inpvp.net
+    192.168.1.10 mco.lbsg.net
+    192.168.1.10 play.galaxite.net
+    192.168.1.10 play.enchanted.gg
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coredns
+  namespace: coredns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coredns
+  template:
+    metadata:
+      labels:
+        app: coredns
+    spec:
+      containers:
+      - name: coredns
+        image: coredns/coredns:1.12.1
+        args:
+        - -conf
+        - /etc/coredns/Corefile
+        ports:
+        - name: dns
+          protocol: UDP
+          containerPort: 53
+          hostPort: 53
+        volumeMounts:
+        - name: configs
+          mountPath: "/etc/coredns"
+          readOnly: true
+      volumes:
+      - name: configs
+        configMap:
+          name: coredns

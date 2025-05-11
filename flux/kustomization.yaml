@@ -13,3 +13,4 @@ resources:
 - wp-kustomization.yaml
 - public-ip-configmapper
 - minecraft
+- coredns
