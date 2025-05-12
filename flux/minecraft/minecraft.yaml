@@ -94,13 +94,13 @@ spec:
           - containerPort: 25565
             protocol: TCP
             name: java
-          readinessProbe: &probe
-            exec:
-              command:
-              - mc-monitor
-              - status
-            initialDelaySeconds: 30
-          livenessProbe: *probe
+          # readinessProbe: &probe
+          #   exec:
+          #     command:
+          #     - mc-monitor
+          #     - status
+          #   initialDelaySeconds: 30
+          # livenessProbe: *probe
           tty: true
           stdin: true
       volumes:
