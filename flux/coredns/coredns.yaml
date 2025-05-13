@@ -28,12 +28,12 @@ data:
       loadbalance
     }
   Hosts: |
-    192.168.1.10 geo.hivebedrock.network
-    192.168.1.10 hivebedrock.network
-    192.168.1.10 play.inpvp.net
-    192.168.1.10 mco.lbsg.net
-    192.168.1.10 play.galaxite.net
-    192.168.1.10 play.enchanted.gg
+    192.168.1.12 geo.hivebedrock.network
+    192.168.1.12 hivebedrock.network
+    192.168.1.12 play.inpvp.net
+    192.168.1.12 mco.lbsg.net
+    192.168.1.12 play.galaxite.net
+    192.168.1.12 play.enchanted.gg
 ---
 apiVersion: apps/v1
 kind: Deployment
