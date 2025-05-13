@@ -53,7 +53,6 @@ spec:
             readOnly: true
           ports:
           - containerPort: 19132
-            hostPort: 19132
             protocol: UDP
             name: bedrock
       volumes:
@@ -63,3 +62,20 @@ spec:
           items:
           - key: "custom_servers.json"
             path: "custom_servers.json"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bedrockconnect
+  namespace: minecraft
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.11
+spec:
+  ports:
+  - name: bedrock
+    port: 19132
+    protocol: UDP
+    targetPort: 19132
+  selector:
+    app: bedrockconnect
+  type: LoadBalancer

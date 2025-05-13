@@ -113,6 +113,8 @@ kind: Service
 metadata:
   name: minecraft
   namespace: minecraft
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.12
 spec:
   selector:
     app: minecraft
@@ -120,9 +122,7 @@ spec:
   - port: 19132
     protocol: UDP
     name: bedrock
-    nodePort: 30132
   - port: 25565
     protocol: TCP
     name: java
-    nodePort: 30565
-  type: NodePort
+  type: LoadBalancer
