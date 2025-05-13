@@ -114,7 +114,7 @@ metadata:
   name: minecraft
   namespace: minecraft
   annotations:
-    metallb.universe.tf/loadBalancerIPs: 192.168.1.12
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.13
 spec:
   selector:
     app: minecraft
