@@ -61,7 +61,6 @@ spec:
         - name: dns
           protocol: UDP
           containerPort: 53
-          hostPort: 53
         volumeMounts:
         - name: configs
           mountPath: "/etc/coredns"
@@ -70,3 +69,20 @@ spec:
       - name: configs
         configMap:
           name: coredns
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coredns
+  namespace: coredns
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.11
+spec:
+  ports:
+  - name: dns
+    port: 53
+    protocol: UDP
+    targetPort: 53
+  selector:
+    app: coredns
+  type: LoadBalancer
