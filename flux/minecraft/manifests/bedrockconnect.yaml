@@ -37,8 +37,6 @@ spec:
       containers:
       - name: main
         image: openjdk:25
-        securityContext:
-          runAsUser: 1000
         command: ["/bin/sh"]
         args:
         - -c
