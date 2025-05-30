@@ -116,7 +116,7 @@ spec:
         tty: true
         stdin: true
       - name: backup
-        image: itzg/minecraft-server:stable
+        image: itzg/mc-backup:stable
         securityContext:
           runAsUser: 1000
         env:
