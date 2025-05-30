@@ -35,26 +35,28 @@ spec:
         app: bedrockconnect
     spec:
       containers:
-        - name: main
-          image: openjdk:25
-          command: ["/bin/sh"]
-          args:
-          - -c
-          - |
-            curl -L -o BedrockConnect-1.0-SNAPSHOT.jar https://github.com/Pugmatt/BedrockConnect/releases/download/1.55/BedrockConnect-1.0-SNAPSHOT.jar
-            java -Xms512M -Xmx512M -jar BedrockConnect-1.0-SNAPSHOT.jar nodb=true custom_servers=/app/custom_servers.json featured_servers=false
-          imagePullPolicy: Always
-          resources:
-            limits:
-              memory: 1Gi
-          volumeMounts:
-          - name: configs
-            mountPath: "/app"
-            readOnly: true
-          ports:
-          - containerPort: 19132
-            protocol: UDP
-            name: bedrock
+      - name: main
+        image: openjdk:25
+        securityContext:
+          runAsUser: 1000
+        command: ["/bin/sh"]
+        args:
+        - -c
+        - |
+          curl -L -o BedrockConnect-1.0-SNAPSHOT.jar https://github.com/Pugmatt/BedrockConnect/releases/download/1.55/BedrockConnect-1.0-SNAPSHOT.jar
+          java -Xms512M -Xmx512M -jar BedrockConnect-1.0-SNAPSHOT.jar nodb=true custom_servers=/app/custom_servers.json featured_servers=false
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 1Gi
+        volumeMounts:
+        - name: configs
+          mountPath: "/app"
+          readOnly: true
+        ports:
+        - containerPort: 19132
+          protocol: UDP
+          name: bedrock
       volumes:
       - name: configs
         configMap:
