@@ -30,6 +30,8 @@ data:
   MEMORY: 4G
   DIFFICULTY: peaceful
   VIEW_DISTANCE: "20"
+  OPS: |
+    bentastic27
 
   #GAMEMODE: "survival" # Options: survival, creative, adventure
   #DIFFICULTY: "easy" # Options: peaceful, easy, normal, hard
