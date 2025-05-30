@@ -14,3 +14,5 @@ spec:
     substituteFrom:
     - kind: Secret
       name: route53-credentials-secret
+    - kind: Secret
+      name: restic-password

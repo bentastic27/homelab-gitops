@@ -25,6 +25,9 @@ echo -n access-key-id > accessKeyId
 echo -n secret-access-key > secretAccessKey
 kubectl -n flux create secret generic route53-credentials-secret --from-file=accessKeyId --from-file=secretAccessKey
 
+# init restic password for minecraft backups
+kubectl -n flux create secret generic restic-password --from-literal=RESTIC_PASSWORD=$(openssl rand -hex 10)
+
 flux bootstrap -n flux github \
   --owner=bentastic27 \
   --repository=homelab-gitops\
