@@ -1,19 +1,4 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: minecraft
----
-apiVersion: v1
-kind: Secret
-type: Opaque
-metadata:
-  name: aws-creds
-  namespace: minecraft
-stringData:
-  aws-access-key: ${accessKeyId}
-  aws-secret-key: ${secretAccessKey}
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: minecraft

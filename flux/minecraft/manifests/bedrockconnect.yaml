@@ -13,6 +13,12 @@ data:
         "iconUrl": "https://i.imgur.com/3BmFZRE.png",
         "address": "192.168.1.13",
         "port": 19132
+      },
+      {
+        "name": "kid",
+        "iconUrl": "https://i.imgur.com/3BmFZRE.png",
+        "address": "192.168.1.14",
+        "port": 19132
       }
     ]
 

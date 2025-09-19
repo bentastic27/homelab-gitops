@@ -1,0 +1,103 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kid-bedrock
+  namespace: minecraft
+  labels:
+    app: kid-bedrock
+data:
+  EULA: "TRUE"
+  GAMEMODE: "creative"
+  VIEW_DISTANCE: "20"
+  TICK_DISTANCE: "4"
+  MAX_THREADS: "8"
+  LLOW_CHEATS: "true"
+  SERVER_NAME: "KID"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: kid-bedrock
+  namespace: minecraft
+  labels:
+    app: kid-bedrock
+spec:
+  storageClassName: openebs-hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: kid-bedrock
+  name: kid-bedrock
+  namespace: minecraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kid-bedrock
+  template:
+    metadata:
+      labels:
+        app: kid-bedrock
+    spec:
+      containers:
+      - name: main
+        image: itzg/minecraft-server:stable
+        securityContext:
+          runAsUser: 1000
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 6Gi
+            cpu: 2
+        envFrom:
+        - configMapRef:
+            name: kid-bedrock
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        ports:
+        - containerPort: 19132
+          protocol: UDP
+          name: bedrock
+        readinessProbe: &probe
+          exec:
+            command:
+              - mc-monitor
+              - status-bedrock
+              - --host
+              # force health check against IPv4 port
+              - 127.0.0.1
+          initialDelaySeconds: 30
+        livenessProbe: *probe
+        tty: true
+        stdin: true
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: kid-bedrock
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kid-bedrock
+  namespace: minecraft
+  labels:
+    app: kid-bedrock
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.14
+spec:
+  selector:
+    app: kid-bedrock
+  ports:
+  - port: 19132
+    protocol: UDP
+    name: bedrock
+  type: LoadBalancer
