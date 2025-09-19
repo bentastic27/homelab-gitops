@@ -7,8 +7,8 @@ metadata:
   labels:
     app: kid-bedrock
 data:
-  UID: 1000
-  GID: 1000
+  UID: "1000"
+  GID: "1000"
   TZ: America/Detroit
   EULA: "TRUE"
   GAMEMODE: "creative"
