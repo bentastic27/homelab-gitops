@@ -19,6 +19,7 @@ data:
   SERVER_NAME: "KID"
   # https://minecraft.wiki/w/Bedrock_Edition_version_history
   VERSION: "1.21.101.1"
+  ONLINE_MODE: "false"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
