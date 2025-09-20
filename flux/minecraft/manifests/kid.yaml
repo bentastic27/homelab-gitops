@@ -17,7 +17,7 @@ data:
   MAX_THREADS: "8"
   LLOW_CHEATS: "true"
   SERVER_NAME: "KID"
-  VERSION: "1.21.101"
+  VERSION: "v1.21.101.1"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
