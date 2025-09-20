@@ -17,6 +17,7 @@ data:
   MAX_THREADS: "8"
   LLOW_CHEATS: "true"
   SERVER_NAME: "KID"
+  # https://minecraft.wiki/w/Bedrock_Edition_version_history
   VERSION: "v1.21.101.1"
 ---
 kind: PersistentVolumeClaim
