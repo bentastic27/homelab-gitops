@@ -11,6 +11,7 @@ metadata:
 data:
   Corefile: |
     . {
+      log
       errors
       health {
           lameduck 5s
