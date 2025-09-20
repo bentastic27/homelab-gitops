@@ -15,7 +15,7 @@ data:
   VIEW_DISTANCE: "20"
   TICK_DISTANCE: "4"
   MAX_THREADS: "8"
-  LLOW_CHEATS: "true"
+  ALLOW_CHEATS: "true"
   SERVER_NAME: "KID"
   # https://minecraft.wiki/w/Bedrock_Edition_version_history
   VERSION: "1.21.101.1"
