@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: matchering-base
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: matchering-base
+  targetNamespace: matchering
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostnames:
+    - matchering.beansnet.net
+    targetService:
+      name: matchering
+      port: 80
+  dependsOn:
+  - name: cert-manager

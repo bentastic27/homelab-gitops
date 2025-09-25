@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+ name: matchering
+ namespace: matchering
+spec:
+  action: DENY
+  selector:
+    matchLabels:
+      app: matchering
+  rules:
+  - from:
+    - source:
+        notRemoteIpBlocks:
+        - "${publicIp:=0.0.0.0/0}"
+    to: []
