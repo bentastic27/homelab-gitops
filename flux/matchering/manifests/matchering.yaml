@@ -33,9 +33,9 @@ spec:
         - containerPort: 8360
         resources:
           requests:
-            memory: 4Gi
+            memory: 500Mi
           limits:
-            memory: 6Gi
+            memory: 1Gi
         volumeMounts:
         - mountPath: /app/data
           name: data
