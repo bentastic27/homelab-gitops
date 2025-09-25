@@ -24,17 +24,15 @@ spec:
   template:
     metadata:
       labels:
-        app: wordpress
-        mariadb-client: "true"
-        memcached-client: "true"
+        app: matchering
     spec:
       containers:
       - name: matchering
-        image: bitnami/wordpress:6.8.1
+        image: sergree/matchering-web:0.1.7
         ports:
         - containerPort: 8360
         volumeMounts:
-        - mountPath: /bitnami/wordpress
+        - mountPath: /app/data
           name: data
       volumes:
       - name: data
