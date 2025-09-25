@@ -31,6 +31,11 @@ spec:
         image: sergree/matchering-web:0.1.7
         ports:
         - containerPort: 8360
+        resources:
+          requests:
+            memory: 4Gi
+          limits:
+            memory: 6Gi
         volumeMounts:
         - mountPath: /app/data
           name: data
