@@ -1,0 +1,40 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: kiali
+  namespace: flux
+spec:
+  interval: 30m0s
+  url: https://kiali.org/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kiali-server
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: kiali-server
+  targetNamespace: istio-system
+  install:
+    createNamespace: false
+  chart:
+    spec:
+      chart: kiali-server
+      version: '2.16.0'
+      sourceRef:
+        kind: HelmRepository
+        name: kiali
+  values:
+    spec:
+      auth:
+        strategy: anonymous
+      deployment:
+        view_only_mode: true
+      external_services:
+        prometheus:
+          url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:8080/
+        grafana:
+          enabled: true
+          internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
