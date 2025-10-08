@@ -27,14 +27,13 @@ spec:
         kind: HelmRepository
         name: kiali
   values:
-    spec:
-      auth:
-        strategy: anonymous
-      deployment:
-        view_only_mode: true
-      external_services:
-        prometheus:
-          url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:8080/
-        grafana:
-          enabled: true
-          internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
+    auth:
+      strategy: anonymous
+    deployment:
+      view_only_mode: true
+    external_services:
+      prometheus:
+        url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:8080/
+      grafana:
+        enabled: true
+        internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
