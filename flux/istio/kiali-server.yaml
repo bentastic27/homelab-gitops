@@ -33,7 +33,7 @@ spec:
       view_only_mode: true
     external_services:
       prometheus:
-        url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:8080/
+        url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090/
       grafana:
         enabled: true
         internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
