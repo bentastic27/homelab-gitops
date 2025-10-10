@@ -13,7 +13,7 @@ data:
     https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
     https://github.com/ViaVersion/ViaVersion/releases/download/5.5.0/ViaVersion-5.5.0.jar
   MEMORY: 4G
-  DIFFICULTY: peaceful
+  DIFFICULTY: easy
   VIEW_DISTANCE: "20"
   OPS: |
     bentastic27
