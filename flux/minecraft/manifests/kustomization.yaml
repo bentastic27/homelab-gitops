@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
 - auxilarystuff.yaml
 - minecraft.yaml
+- minecraft2.yaml
 - bedrockconnect.yaml
 - kid.yaml
