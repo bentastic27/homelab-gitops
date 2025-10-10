@@ -1,0 +1,155 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minecraft2
+  namespace: minecraft
+  labels:
+    app: minecraft2
+data:
+  EULA: "TRUE" # Must accept EULA to use this minecraft server
+  TYPE: PAPER
+  PLUGINS: |
+    https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
+    https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+    https://github.com/ViaVersion/ViaVersion/releases/download/5.4.2/ViaVersion-5.4.2.jar
+  MEMORY: 4G
+  DIFFICULTY: peaceful
+  VIEW_DISTANCE: "20"
+  OPS: |
+    bentastic27
+
+  #GAMEMODE: "survival" # Options: survival, creative, adventure
+  #DIFFICULTY: "easy" # Options: peaceful, easy, normal, hard
+  #DEFAULT_PLAYER_PERMISSION_LEVEL: "member" # Options: visitor, member, operator
+  #LEVEL_NAME: "my_minecraft_world"
+  #LEVEL_SEED: "33480944"
+  #SERVER_NAME: "my_minecraft_server"
+  #SERVER_PORT: "19132"
+  #LEVEL_TYPE: "DEFAULT" # Options: FLAT, LEGACY, DEFAULT
+  #ALLOW_CHEATS: "false" # Options: true, false
+  #MAX_PLAYERS: "10"
+  #PLAYER_IDLE_TIMEOUT: "30"
+  #TEXTUREPACK_REQUIRED: "false" # Options: true, false
+  #
+  ## Changing these will have a security impact
+  #ONLINE_MODE: "true" # Options: true, false (removes Xbox Live account requirements)
+  #WHITE_LIST: "false" # If enabled, need to provide a whitelist.json by your own means. 
+  #
+  ## Changing these will have a performance impact
+  #VIEW_DISTANCE: "10"
+  #TICK_DISTANCE: "4"
+  #MAX_THREADS: "8"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: minecraft2
+  namespace: minecraft
+spec:
+  storageClassName: openebs-hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: minecraft2
+  name: minecraft2
+  namespace: minecraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft2
+  template:
+    metadata:
+      labels:
+        app: minecraft2
+    spec:
+      containers:
+      - name: main
+        image: itzg/minecraft-server:stable
+        securityContext:
+          runAsUser: 1000
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 6Gi
+            cpu: 2
+        envFrom:
+        - configMapRef:
+            name: minecraft
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        ports:
+        - containerPort: 19132
+          protocol: UDP
+          name: bedrock
+        - containerPort: 25565
+          protocol: TCP
+          name: java
+        readinessProbe: &probe
+          exec:
+            command:
+            - mc-monitor
+            - status
+          initialDelaySeconds: 120
+        livenessProbe: *probe
+        tty: true
+        stdin: true
+      - name: backup
+        image: itzg/mc-backup:stable
+        securityContext:
+          runAsUser: 1000
+        env:
+        - name: PRUNE_RESTIC_RETENTION
+          value: --keep-daily 7 --keep-weekly 2
+        - name: TAR_COMPRESS_METHOD
+          value: gzip
+        - name: BACKUP_METHOD
+          value: restic
+        - name: RESTIC_REPOSITORY
+          value: s3:s3.us-east-2.amazonaws.com/bentastic27-minecraft-backups/restic
+        - name: RESTIC_PASSWORD
+          value: ${RESTIC_PASSWORD}
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-creds
+              key: aws-access-key
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-creds
+              key: aws-secret-key
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: minecraft2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minecraft2
+  namespace: minecraft
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.1.15
+spec:
+  selector:
+    app: minecraft2
+  ports:
+  - port: 19132
+    protocol: UDP
+    name: bedrock
+  - port: 25565
+    protocol: TCP
+    name: java
+  type: LoadBalancer
