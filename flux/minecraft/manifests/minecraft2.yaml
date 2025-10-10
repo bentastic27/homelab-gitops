@@ -98,7 +98,7 @@ spec:
             command:
             - mc-monitor
             - status
-          initialDelaySeconds: 120
+          initialDelaySeconds: 60
         livenessProbe: *probe
         tty: true
         stdin: true
