@@ -41,7 +41,7 @@ spec:
         - notice
         ports:
         - containerPort: 6379
-          name: web
+          name: valkey
         resources:
           requests:
             memory: 96Mi
