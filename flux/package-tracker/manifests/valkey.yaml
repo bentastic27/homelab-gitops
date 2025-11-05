@@ -43,7 +43,10 @@ spec:
         - containerPort: 6379
           name: web
         resources:
-        
+          requests:
+            memory: 96Mi
+          limits:
+            memory: 256Mi
         volumeMounts:
         - name: valkey-data
           mountPath: /data
