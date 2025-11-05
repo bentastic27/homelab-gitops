@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: package-tracker-base
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: package-tracker-base
+  targetNamespace: package-tracker
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostnames:
+    - package-tracker.beansnet.net
+    targetService:
+      name: package-tracker
+      port: 80
+  dependsOn:
+  - name: cert-manager

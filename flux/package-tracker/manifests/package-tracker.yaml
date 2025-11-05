@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: package-tracker
+  namespace: package-tracker
+spec:
+  selector:
+    matchLabels:
+      app: package-tracker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: package-tracker
+    spec:
+      containers:
+      - name: package-tracker
+        image: bentastic27/package-tracker:2d3813c949e782e0ec00100310cec8bc7417b210
+        ports:
+        - containerPort: 8000
+          name: http
+        resources:
+          requests:
+            memory: 128Mi
+          limits:
+            memory: 256Mi
+        env:
+        - name: VALKEY_HOST
+          value: valkey.package-tracker.svc.cluster.local
+        - name: VALKEY_PORT
+          value: "6379"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: package-tracker
+  namespace: package-tracker
+spec:
+  ports:
+  - port: 80
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: package-tracker

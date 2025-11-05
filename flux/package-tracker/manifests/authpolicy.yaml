@@ -1,0 +1,33 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+ name: package-tracker
+ namespace: package-tracker
+spec:
+  action: DENY
+  selector:
+    matchLabels:
+      app: package-tracker
+  rules:
+  - from:
+    - source:
+        notRemoteIpBlocks:
+        - "${publicIp:=0.0.0.0/0}"
+    to: []
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+ name: valkey
+ namespace: package-tracker
+spec:
+  action: DENY
+  selector:
+    matchLabels:
+      app: valkey
+  rules:
+  - from:
+    - source:
+        notNamespaces:
+        - package-tracker
+    to: []
