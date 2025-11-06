@@ -6,9 +6,13 @@ metadata:
 spec:
   action: ALLOW
   targetRefs:
-  - kind: Service
-    group: ""
-    name: package-tracker
+  # - kind: Service
+  #   group: ""
+  #   name: package-tracker
+    kind: Gateway
+    group: gateway.networking.k8s.io
+    name: gateway
+    namespace: istio-system
   rules:
   - from:
     - source:
