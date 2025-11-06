@@ -49,8 +49,10 @@ metadata:
   name: deny-ingress
   namespace: package-tracker
 spec:
+  podSelector: {}
   policyTypes:
   - Ingress
+  - Egress
 ---
 # apiVersion: security.istio.io/v1
 # kind: AuthorizationPolicy
