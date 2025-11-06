@@ -18,10 +18,12 @@ spec:
     - operation:
         paths:
         - "/wp-admin*"
+        - "/wp-login*"
   - to:
     - operation:
         notPaths:
         - "/wp-admin*"
+        - "/wp-login*"
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
