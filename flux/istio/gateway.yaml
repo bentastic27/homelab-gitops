@@ -20,9 +20,9 @@ metadata:
   namespace: istio-system
 spec:
   gatewayClassName: istio
-  addresses:
-  - value: ingressgateway.istio-system.svc.cluster.local
-    type: Hostname
+  infrastructure:
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: 192.168.1.11
   listeners:
   - name: base-http
     hostname: "beansnet.net"

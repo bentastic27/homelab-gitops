@@ -16,36 +16,6 @@ spec:
     cni:
       namespace: istio-system
       enabled: true
-    ingressGateways:
-      - name: ingressgateway
-        enabled: true
-        k8s:
-          service:
-            externalTrafficPolicy: Local
-            type: NodePort
-            ports:
-            - name: status-port
-              port: 15021
-              protocol: TCP
-              targetPort: 15021
-            - name: http2
-              nodePort: 30080
-              port: 8080
-              protocol: TCP
-              targetPort: 8080
-            - name: https
-              nodePort: 30443
-              port: 8443
-              protocol: TCP
-              targetPort: 8443
-          overlays:
-          - kind: Deployment
-            name: ingressgateway
-            patches:
-            - path: kind
-              value: DaemonSet
-            - path: spec.strategy
-              value: null
   values:
     pilot:
       env:
