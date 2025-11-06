@@ -5,9 +5,13 @@ metadata:
  namespace: package-tracker
 spec:
   action: DENY
-  selector:
-    matchLabels:
-      app: package-tracker
+  # selector:
+  #   matchLabels:
+  #     app: package-tracker
+  targetRefs:
+  - kind: Gateway
+    group: gateway.networking.k8s.io
+    name: waypoint
   rules:
   - from:
     - source:
@@ -30,5 +34,4 @@ spec:
     - source:
         notNamespaces:
         - package-tracker
-        - istio-system
     to: []
