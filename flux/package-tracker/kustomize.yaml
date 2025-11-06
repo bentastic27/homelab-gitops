@@ -15,4 +15,4 @@ spec:
     - kind: ConfigMap
       name: common-configs
   dependsOn:
-  - name: kubernetes-secrets-generator
+  - name: kubernetes-secret-generator
