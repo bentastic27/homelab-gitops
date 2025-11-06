@@ -1,3 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: package-tracker
+  namespace: package-tracker
+  annotations:
+    secret-generator.v1.mittwald.de/type: string
+    secret-generator.v1.mittwald.de/autogenerate: CSRF_SECRET_KEY
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +24,7 @@ spec:
     spec:
       containers:
       - name: package-tracker
-        image: bentastic27/package-tracker:0.0.4
+        image: bentastic27/package-tracker:0.0.5
         ports:
         - containerPort: 8000
           name: http
@@ -30,7 +39,12 @@ spec:
         - name: VALKEY_PORT
           value: "6379"
         - name: WEB_CONCURRENCY
-          value: "1"
+          value: "2"
+        - name: CSRF_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: package-tracker
+              key: CSRF_SECRET_KEY
 ---
 apiVersion: v1
 kind: Service

@@ -14,3 +14,5 @@ spec:
     substituteFrom:
     - kind: ConfigMap
       name: common-configs
+  dependsOn:
+  - name: kubernetes-secrets-generator
