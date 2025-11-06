@@ -42,18 +42,15 @@ spec:
       protocol: TCP
     - port: 15008
       protocol: TCP
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: deny-ingress
-#   namespace: package-tracker
-# spec:
-#   podSelector:
-#     matchLabels:
-#       app.kubernetes.io/name: my-app
-#   policyTypes:
-#   - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-ingress
+  namespace: package-tracker
+spec:
+  policyTypes:
+  - Ingress
 ---
 # apiVersion: security.istio.io/v1
 # kind: AuthorizationPolicy
