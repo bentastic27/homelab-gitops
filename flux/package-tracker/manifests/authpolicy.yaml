@@ -33,40 +33,34 @@ spec:
     - source:
         namespaces:
         - package-tracker
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: allow-inbound-http
-#   namespace: package-tracker
-# spec:
-#   podSelector:
-#     matchLabels:
-#       app: package-tracker
-#   ingress:
-#   - ports:
-#     - port: 80
-#       protocol: TCP
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: allow-inbound-hbone
-#   namespace: package-tracker
-# spec:
-#   podSelector: {}
-#   ingress:
-#   - ports:
-#     - port: 15008
-#       protocol: TCP
-# ---
-# apiVersion: networking.k8s.io/v1
-# kind: NetworkPolicy
-# metadata:
-#   name: deny-all
-#   namespace: package-tracker
-# spec:
-#   podSelector: {}
-#   policyTypes:
-#   - Ingress
-#   - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-inbound-http
+  namespace: package-tracker
+spec:
+  podSelector:
+    matchLabels:
+      app: package-tracker
+  ingress:
+  - ports:
+    - port: 80
+      protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-hbone
+  namespace: package-tracker
+spec:
+  podSelector: {}
+  ingress:
+  - ports:
+    - port: 15008
+      protocol: TCP
+  egress:
+  - ports:
+    - port: 15008
+      protocol: TCP
+
