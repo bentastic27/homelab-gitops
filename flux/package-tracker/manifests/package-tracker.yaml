@@ -30,7 +30,7 @@ spec:
         - name: VALKEY_PORT
           value: "6379"
         - name: WEB_CONCURRENCY
-          value: "2"
+          value: "1"
 ---
 apiVersion: v1
 kind: Service
