@@ -40,37 +40,15 @@ spec:
       kind: ConfigMap
       name: gateway-options
   listeners:
-  - name: base-http
-    hostname: "beansnet.net"
-    port: 8080
+  - name: http
+    port: 80
     protocol: HTTP
     allowedRoutes:
       namespaces:
         from: All
-  - name: wildcard-http
-    hostname: "*.beansnet.net"
-    port: 8080
-    protocol: HTTP
-    allowedRoutes:
-      namespaces:
-        from: All
-  - name: base-https
+  - name: https
     protocol: HTTPS
-    port: 8443
-    hostname: "beansnet.net"
-    allowedRoutes:
-      namespaces:
-        from: All
-    tls:
-      mode: Terminate
-      certificateRefs:
-      - kind: Secret
-        group: ""
-        name: beansnet-cert
-  - name: wildcard-https
-    protocol: HTTPS
-    port: 8443
-    hostname: "*.beansnet.net"
+    port: 443
     allowedRoutes:
       namespaces:
         from: All
