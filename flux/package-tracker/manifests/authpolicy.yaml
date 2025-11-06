@@ -33,23 +33,23 @@ spec:
     - source:
         namespaces:
         - package-tracker
----
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: package-tracker-waypoint
-  namespace: package-tracker
-spec:
-  action: ALLOW
-  targetRefs:
-  - kind: Gateway
-    group: gateway.networking.k8s.io
-    name: waypoint
-  rules:
-  - from:
-    - source:
-        principals:
-        - spiffe://cluster.local/ns/package-tracker/sa/waypoint
+# ---
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: package-tracker-waypoint
+#   namespace: package-tracker
+# spec:
+#   action: ALLOW
+#   targetRefs:
+#   - kind: Gateway
+#     group: gateway.networking.k8s.io
+#     name: waypoint
+#   rules:
+#   - from:
+#     - source:
+#         principals:
+#         - spiffe://cluster.local/ns/package-tracker/sa/waypoint
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: NetworkPolicy
