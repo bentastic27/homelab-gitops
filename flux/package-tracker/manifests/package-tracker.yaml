@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: package-tracker
-        image: bentastic27/package-tracker:d8cad9aebd9f7e14ec3ba4e54d33847736cbb4f8
+        image: bentastic27/package-tracker:0.0.3
         ports:
         - containerPort: 8000
           name: http
