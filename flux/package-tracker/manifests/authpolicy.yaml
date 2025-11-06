@@ -1,29 +1,22 @@
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
-  name: package-tracker  
+  name: package-tracker-https
   namespace: package-tracker
 spec:
   action: ALLOW
-  # selector:
-  #   matchLabels:
-  #     app: package-tracker
   targetRefs:
-  - kind: Gateway
-    group: gateway.networking.k8s.io
-    name: waypoint
+  - kind: Service
+    group: ""
+    name: package-tracker-base-https
   rules:
-  # - from:
-  #   - source:
-  #       remoteIpBlocks:
-  #       - "${publicIp:=0.0.0.0/0}"
-  #       namespaces:
-  #       - package-tracker
-  #       - istio-system
   - from:
     - source:
-        principals:
-        - spiffe://cluster.local/ns/package-tracker/sa/waypoint
+        remoteIpBlocks:
+        - "${publicIp:=0.0.0.0/0}"
+        namespaces:
+        - package-tracker
+        - istio-system
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
