@@ -9,7 +9,7 @@ spec:
   # - kind: Service
   #   group: ""
   #   name: package-tracker
-    kind: Gateway
+  - kind: Gateway
     group: gateway.networking.k8s.io
     name: gateway
     namespace: istio-system
