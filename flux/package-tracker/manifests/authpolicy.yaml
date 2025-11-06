@@ -46,8 +46,6 @@ spec:
   - ports:
     - port: 80
       protocol: TCP
-    - port: 15008
-      protocol: TCP
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
@@ -59,6 +57,10 @@ spec:
   policyTypes:
   - Ingress
   - Egress
+  ingress:
+  - ports:
+    - port: 15008
+      protocol: TCP
 ---
 # apiVersion: security.istio.io/v1
 # kind: AuthorizationPolicy
