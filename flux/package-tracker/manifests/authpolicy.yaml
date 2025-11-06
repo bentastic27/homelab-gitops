@@ -32,7 +32,6 @@ spec:
   - from:
     - source:
         namespaces:
-        - istio-system
         - package-tracker
 ---
 apiVersion: security.istio.io/v1
