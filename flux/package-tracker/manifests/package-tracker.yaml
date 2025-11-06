@@ -29,6 +29,8 @@ spec:
           value: valkey.package-tracker.svc.cluster.local
         - name: VALKEY_PORT
           value: "6379"
+        - name: WEB_CONCURRENCY
+          value: "2"
 ---
 apiVersion: v1
 kind: Service
