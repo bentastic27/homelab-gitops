@@ -4,7 +4,7 @@ metadata:
  name: matchering
  namespace: matchering
 spec:
-  action: Allow
+  action: ALLOW
   targetRefs:
   - kind: Service
     group: ""
