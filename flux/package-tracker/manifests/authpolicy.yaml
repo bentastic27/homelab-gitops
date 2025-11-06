@@ -8,7 +8,7 @@ spec:
   targetRefs:
   - kind: Service
     group: ""
-    name: package-tracker-base-https
+    name: package-tracker
   rules:
   - from:
     - source:
@@ -16,7 +16,6 @@ spec:
         - "${publicIp:=0.0.0.0/0}"
         principals:
         - spiffe://cluster.local/ns/package-tracker/sa/waypoint
-        - spiffe://cluster.local/ns/package-tracker/sa/default
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
