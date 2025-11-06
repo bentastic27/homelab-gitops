@@ -21,6 +21,11 @@ spec:
     - source:
         principals:
         - spiffe://cluster.local/ns/package-tracker/sa/waypoint
+  - from:
+    - source:
+        namespaces:
+        - package-tracker
+        - istio-system
 ---
 # apiVersion: security.istio.io/v1
 # kind: AuthorizationPolicy
