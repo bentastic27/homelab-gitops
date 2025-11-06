@@ -20,6 +20,24 @@ spec:
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
+  name: package-tracker-valkey
+  namespace: package-tracker
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: valkey
+  rules:
+  - from:
+    - source:
+        principals:
+        - spiffe://cluster.local/ns/package-tracker/sa/waypoint
+        - spiffe://cluster.local/ns/package-tracker/sa/default
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
   name: package-tracker-waypoint
   namespace: package-tracker
 spec:
