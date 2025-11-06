@@ -9,9 +9,9 @@ spec:
   #   matchLabels:
   #     app: package-tracker
   targetRefs:
-  - kind: HTTPRoute
+  - kind: Gateway
     group: gateway.networking.k8s.io
-    name: package-tracker-base-https
+    name: waypoint
   rules:
   - from:
     - source:
