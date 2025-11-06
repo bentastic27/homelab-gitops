@@ -6,20 +6,14 @@ metadata:
 spec:
   action: ALLOW
   targetRefs:
-  # - kind: Service
-  #   group: ""
-  #   name: package-tracker
-  - kind: Gateway
-    group: gateway.networking.k8s.io
-    name: gateway
-    namespace: istio-system
+  - kind: Service
+    group: ""
+    name: package-tracker
   rules:
   - from:
     - source:
         remoteIpBlocks:
         - "${publicIp:=0.0.0.0/0}"
-        # principals:
-        # - spiffe://cluster.local/ns/package-tracker/sa/waypoint
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
