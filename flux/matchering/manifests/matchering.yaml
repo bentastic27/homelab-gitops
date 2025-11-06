@@ -49,6 +49,8 @@ kind: Service
 metadata:
   name: matchering
   namespace: matchering
+  labels:
+    istio.io/ingress-use-waypoint: "true"
 spec:
   ports:
   - port: 80
