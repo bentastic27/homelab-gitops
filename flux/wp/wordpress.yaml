@@ -62,6 +62,8 @@ kind: Service
 metadata:
   name: wordpress
   namespace: wordpress
+  labels:
+    istio.io/ingress-use-waypoint: "true"
 spec:
   ports:
   - port: 80
