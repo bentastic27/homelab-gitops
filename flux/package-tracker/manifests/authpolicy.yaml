@@ -4,7 +4,7 @@ metadata:
   name: package-tracker-https
   namespace: package-tracker
 spec:
-  action: DENY
+  action: ALLOW
   targetRefs:
   - kind: Service
     group: ""
@@ -12,7 +12,7 @@ spec:
   rules:
   - from:
     - source:
-        notRemoteIpBlocks:
+        remoteIpBlocks:
         - "${publicIp:=0.0.0.0/0}"
         # principals:
         # - spiffe://cluster.local/ns/package-tracker/sa/waypoint
