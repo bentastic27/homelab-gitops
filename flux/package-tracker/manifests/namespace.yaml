@@ -5,3 +5,5 @@ metadata:
   labels:
     # istio-injection: enabled
     istio.io/dataplane-mode: ambient
+    istio.io/use-waypoint: shared-waypoint
+    istio.io/use-waypoint-namespace: istio-system
