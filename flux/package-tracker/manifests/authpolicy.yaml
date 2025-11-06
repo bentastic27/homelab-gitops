@@ -4,7 +4,7 @@ metadata:
  name: package-tracker
  namespace: package-tracker
 spec:
-  action: DENY
+  action: ALLOW
   # selector:
   #   matchLabels:
   #     app: package-tracker
@@ -15,9 +15,12 @@ spec:
   rules:
   - from:
     - source:
-        notRemoteIpBlocks:
+        remoteIpBlocks:
         - "${publicIp:=0.0.0.0/0}"
-    to: []
+  - from:
+    - source:
+      - notPrincipals:
+        - spiffe://cluster.local/ns/package-tracker/sa/waypoint
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
