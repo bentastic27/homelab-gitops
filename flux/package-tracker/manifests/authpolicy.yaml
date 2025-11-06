@@ -5,10 +5,9 @@ metadata:
   namespace: package-tracker
 spec:
   action: ALLOW
-  targetRefs:
-  - kind: Service
-    group: ""
-    name: package-tracker
+  selector:
+    matchLabels:
+      app: package-tracker
   rules:
   - from:
     - source:
