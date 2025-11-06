@@ -30,4 +30,5 @@ spec:
     - source:
         notNamespaces:
         - package-tracker
+        - istio-system
     to: []
