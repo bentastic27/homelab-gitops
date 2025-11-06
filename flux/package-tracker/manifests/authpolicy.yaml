@@ -13,19 +13,17 @@ spec:
     group: gateway.networking.k8s.io
     name: waypoint
   rules:
-  - from:
-    - source:
-        remoteIpBlocks:
-        - "${publicIp:=0.0.0.0/0}"
+  # - from:
+  #   - source:
+  #       remoteIpBlocks:
+  #       - "${publicIp:=0.0.0.0/0}"
+  #       namespaces:
+  #       - package-tracker
+  #       - istio-system
   - from:
     - source:
         principals:
         - spiffe://cluster.local/ns/package-tracker/sa/waypoint
-  - from:
-    - source:
-        namespaces:
-        - package-tracker
-        - istio-system
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
