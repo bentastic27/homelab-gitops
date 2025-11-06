@@ -5,3 +5,5 @@ resources:
 - gateway.yaml
 - telemetries.yaml
 - kiali-server.yaml
+- mutual-mtls.yaml
+- waypoint.yaml
