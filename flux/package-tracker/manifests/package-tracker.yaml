@@ -37,6 +37,8 @@ kind: Service
 metadata:
   name: package-tracker
   namespace: package-tracker
+  labels:
+    istio.io/ingress-use-waypoint: true
 spec:
   ports:
   - port: 80
