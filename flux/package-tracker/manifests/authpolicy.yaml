@@ -14,8 +14,8 @@ spec:
     - source:
         remoteIpBlocks:
         - "${publicIp:=0.0.0.0/0}"
-        principals:
-        - spiffe://cluster.local/ns/package-tracker/sa/waypoint
+        # principals:
+        # - spiffe://cluster.local/ns/package-tracker/sa/waypoint
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
