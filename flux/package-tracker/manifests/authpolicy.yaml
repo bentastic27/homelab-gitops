@@ -14,9 +14,7 @@ spec:
     - source:
         remoteIpBlocks:
         - "${publicIp:=0.0.0.0/0}"
-        namespaces:
-        - package-tracker
-        - istio-system
+
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
