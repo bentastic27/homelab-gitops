@@ -13,6 +13,17 @@ spec:
     name: letsencrypt-dns-cluster-issuer
     kind: ClusterIssuer
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-options
+  namespace: istio-system
+data:
+  service: |
+    metadata:
+      annotations:
+        metallb.universe.tf/loadBalancerIPs: 192.168.1.20
+---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -21,8 +32,10 @@ metadata:
 spec:
   gatewayClassName: istio
   infrastructure:
-    annotations:
-      metallb.universe.tf/loadBalancerIPs: 192.168.1.11
+    parametersRef:
+      group: ""
+      kind: ConfigMap
+      name: gateway-options
   listeners:
   - name: base-http
     hostname: "beansnet.net"
