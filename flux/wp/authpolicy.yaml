@@ -12,7 +12,7 @@ spec:
   rules:
   - from:
     - source:
-        notRemoteIpBlocks:
+        remoteIpBlocks:
         - "${publicIp:=0.0.0.0/0}"
     to:
     - operation:
