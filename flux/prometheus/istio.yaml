@@ -87,4 +87,5 @@ spec:
     - istio-system
   podMetricsEndpoints:
   - portNumber: 15020
-  - portNumber: 15090
+    path: /stats/prometheus
+
