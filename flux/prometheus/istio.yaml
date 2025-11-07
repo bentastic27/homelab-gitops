@@ -77,7 +77,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: istio
-  namespace: istio-system
+  namespace: prometheus
 spec:
   selector:
     matchLabels:
