@@ -76,14 +76,60 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: istio
+  name: istio-ztunnel
   namespace: prometheus
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/part-of: istio
+      app.kubernetes.io/name: ztunnel
   namespaceSelector:
     matchNames:
     - istio-system
   podMetricsEndpoints:
-  - portNumber: 15020      
+  - portNumber: 15020
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: istio-istiod
+  namespace: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: istiod
+  namespaceSelector:
+    matchNames:
+    - istio-system
+  podMetricsEndpoints:
+  - portNumber: 15014
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: istio-ztunnel
+  namespace: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ztunnel
+  namespaceSelector:
+    matchNames:
+    - istio-system
+  podMetricsEndpoints:
+  - portNumber: 15020
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: istio-gateways
+  namespace: prometheus
+spec:
+  selector:
+    matchLabels:
+      gateway.istio.io/managed: istio.io-gateway-controller
+  namespaceSelector:
+    matchNames:
+    - istio-system
+  podMetricsEndpoints:
+  - portNumber: 15020
+  - portNumber: 15090
