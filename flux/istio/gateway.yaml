@@ -9,6 +9,7 @@ spec:
   dnsNames:
   - beansnet.net
   - "*.beansnet.net"
+  - "*.int.beansnet.net"
   issuerRef:
     name: letsencrypt-dns-cluster-issuer
     kind: ClusterIssuer
