@@ -25,4 +25,9 @@ spec:
       prometheusSpec:
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
+    grafana:
+      admin:
+        existingSecret: grafana-auth
+        userKey: username
+        passwordKey: password
 

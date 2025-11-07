@@ -7,13 +7,13 @@ authPolicy: # todo
   allowAll: false
 parentRefs:
   http:
-  - name: gateway
+  - name: public-gateway
     namespace: istio-system
     group: gateway.networking.k8s.io
     kind: Gateway
     sectionName: http
   https:
-  - name: gateway
+  - name: public-gateway
     namespace: istio-system
     group: gateway.networking.k8s.io
     kind: Gateway

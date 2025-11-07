@@ -22,15 +22,51 @@ data:
   service: |
     metadata:
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 192.168.1.20
+        metallb.universe.tf/loadBalancerIPs: 192.168.1.11
+        metallb.io/allow-shared-ip: "share-192.168.1.11"
     spec:
       externalTrafficPolicy: Local
       allocateLoadBalancerNodePorts: false
+      ports:
+      - $patch: delete
+        port: 15021
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: gateway
+  name: public-gateway
+  namespace: istio-system
+spec:
+  gatewayClassName: istio
+  infrastructure:
+    parametersRef:
+      group: ""
+      kind: ConfigMap
+      name: gateway-options
+  listeners:
+  - name: http
+    port: 8080
+    protocol: HTTP
+    allowedRoutes:
+      namespaces:
+        from: All
+  - name: https
+    protocol: HTTPS
+    port: 8443
+    allowedRoutes:
+      namespaces:
+        from: All
+    tls:
+      mode: Terminate
+      certificateRefs:
+      - kind: Secret
+        group: ""
+        name: beansnet-cert
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: internal-gateway
   namespace: istio-system
 spec:
   gatewayClassName: istio
