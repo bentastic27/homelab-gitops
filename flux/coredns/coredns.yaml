@@ -78,7 +78,6 @@ metadata:
   namespace: coredns
   annotations:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.11
-    metallb.io/allow-shared-ip: "share-192.168.1.11"
 spec:
   ports:
   - name: dns

@@ -22,8 +22,8 @@ data:
   service: |
     metadata:
       annotations:
-        metallb.universe.tf/loadBalancerIPs: 192.168.1.11
-        metallb.io/allow-shared-ip: "share-192.168.1.11"
+        metallb.universe.tf/loadBalancerIPs: 192.168.1.20
+        metallb.io/allow-shared-ip: "shared-192.168.1.20"
     spec:
       externalTrafficPolicy: Local
       allocateLoadBalancerNodePorts: false
