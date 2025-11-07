@@ -31,12 +31,13 @@ spec:
         userKey: username
         passwordKey: password
       route:
-        enabled: true
-        hostnames:
-        - grafana.beansnet.net
-        parentRefs:
-        - name: internal-gateway
-          namespace: istio-system
-          group: gateway.networking.k8s.io
-          kind: Gateway
-          sectionName: https
+        main:
+          enabled: true
+          hostnames:
+          - grafana.beansnet.net
+          parentRefs:
+          - name: internal-gateway
+            namespace: istio-system
+            group: gateway.networking.k8s.io
+            kind: Gateway
+            sectionName: https
