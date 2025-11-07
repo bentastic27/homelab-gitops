@@ -34,7 +34,7 @@ spec:
         main:
           enabled: true
           hostnames:
-          - grafana.beansnet.net
+          - grafana.int.beansnet.net
           parentRefs:
           - name: internal-gateway
             namespace: istio-system
