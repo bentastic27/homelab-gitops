@@ -22,6 +22,17 @@ spec:
     alertmanager:
       enabled: false
     prometheus:
+      route:
+        main:
+          enabled: true
+          hostnames:
+          - prometheus.int.beansnet.net
+          parentRefs:
+          - name: internal-gateway
+            namespace: istio-system
+            group: gateway.networking.k8s.io
+            kind: Gateway
+            sectionName: https
       prometheusSpec:
         podMonitorSelectorNilUsesHelmValues: false
         serviceMonitorSelectorNilUsesHelmValues: false
