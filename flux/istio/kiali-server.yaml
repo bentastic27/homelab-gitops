@@ -72,6 +72,7 @@ spec:
             kind: Service
             name: oauth2-proxy
             namespace: oauth2-proxy
+            port: 80
     matches:
     - path:
         type: PathPrefix
