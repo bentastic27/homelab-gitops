@@ -20,24 +20,6 @@ spec:
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
-  name: ext-authz
-  namespace: package-tracker
-spec:
-  targetRefs:
-  - kind: Service
-    group: ""
-    name: package-tracker
-  action: CUSTOM
-  provider:
-    name: oauth2-proxy
-  rules:
-  - to:
-    - operation:
-        paths: ["/"]
----
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
   name: package-tracker-valkey
   namespace: package-tracker
 spec:
