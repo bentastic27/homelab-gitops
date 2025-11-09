@@ -10,3 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux
+  postBuild:
+    substituteFrom:
+    - kind: Secret
+      name: github-oauth

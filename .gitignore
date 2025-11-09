@@ -1,4 +1,6 @@
 tmp.yaml
 accessKeyId
 secretAccessKey
+OAUTH2_PROXY_CLIENT_ID
+OAUTH2_PROXY_CLIENT_SECRET
 .vscode
