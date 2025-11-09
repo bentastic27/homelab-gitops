@@ -12,6 +12,15 @@ spec:
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         PILOT_ENABLE_IP_AUTOALLOCATE: "true"
+    extensionProviders:
+    - name: "oauth2-proxy"
+      envoyExtAuthzHttp:
+        service: "oauth2-proxy.oauth2-proxy.svc.cluster.local"
+        port: "80"
+        includeRequestHeadersInCheck: ["authorization", "cookie"]
+        headersToUpstreamOnAllow: ["authorization", "path", "x-auth-request-user", "x-auth-request-email", "x-auth-request-access-token"]
+        headersToDownstreamOnAllow: ["set-cookie"]
+        headersToDownstreamOnDeny: ["content-type", "set-cookie"]
   components:
     cni:
       namespace: istio-system

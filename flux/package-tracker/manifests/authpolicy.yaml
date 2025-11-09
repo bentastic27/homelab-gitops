@@ -20,6 +20,22 @@ spec:
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
+  name: ext-authz
+spec:
+  selector:
+    matchLabels:
+      app: httpbin
+  action: CUSTOM
+  provider:
+    name: oauth2-proxy
+  rules:
+  - to:
+    - operation:
+        paths: ["/"]
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
   name: package-tracker-valkey
   namespace: package-tracker
 spec:
