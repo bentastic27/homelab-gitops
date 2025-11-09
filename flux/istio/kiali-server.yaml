@@ -131,7 +131,7 @@ spec:
   provider:
     name: oauth2-proxy
   rules:
-  - to:
-    - operation:
+  - from:
+    - source:
         notPrincipals:
         - cluster.local/ns/istio-system/sa/internal-gateway-istio
