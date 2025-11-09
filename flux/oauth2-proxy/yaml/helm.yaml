@@ -41,3 +41,13 @@ spec:
     envFrom:
     - secretRef:
         name: github-oauth
+  postRenderers:
+  - kustomize:
+      patches:
+      - target:
+          version: v1
+          kind: Deployment
+          name: oauth2-proxy
+        patch: |
+          - op: remove
+            path: /spec/template/spec/containers/0/env
