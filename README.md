@@ -26,10 +26,17 @@ echo -n secret-access-key > secretAccessKey
 kubectl -n flux create secret generic route53-credentials-secret --from-file=accessKeyId --from-file=secretAccessKey
 
 # oath2-proxy secret:
-# https://github.com/settings/developers
+# https://console.cloud.google.com/auth/clients
 echo -n clientid > OAUTH2_PROXY_CLIENT_ID
 echo -n clientsecret > OAUTH2_PROXY_CLIENT_SECRET
-kubectl -n flux create secret generic github-oauth --from-file=OAUTH2_PROXY_CLIENT_ID --from-file=OAUTH2_PROXY_CLIENT_SECRET --from-literal=OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -base64 32 | head -c 32)
+echo -n google-admin-email > OAUTH2_PROXY_GOOGLE_ADMIN_EMAIL
+echo -n google-GROUP > OAUTH2_PROXY_GOOGLE_GROUP
+kubectl -n flux create secret generic google-oauth \
+  --from-file=OAUTH2_PROXY_CLIENT_ID \
+  --from-file=OAUTH2_PROXY_CLIENT_SECRET \
+  --from-file=OAUTH2_PROXY_GOOGLE_ADMIN_EMAIL \
+  --from-file=OAUTH2_PROXY_GOOGLE_GROUP \
+  --from-literal=OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -base64 32 | head -c 32)
 
 # init restic password for minecraft backups
 kubectl -n flux create secret generic restic-password --from-literal=RESTIC_PASSWORD=$(openssl rand -hex 10)

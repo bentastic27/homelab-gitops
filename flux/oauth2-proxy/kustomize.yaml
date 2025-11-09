@@ -13,4 +13,4 @@ spec:
   postBuild:
     substituteFrom:
     - kind: Secret
-      name: github-oauth
+      name: google-oauth
