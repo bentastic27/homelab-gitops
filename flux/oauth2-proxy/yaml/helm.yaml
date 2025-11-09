@@ -40,4 +40,4 @@ spec:
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
     envFrom:
     - secretRef:
-      name: github-oauth
+        name: github-oauth
