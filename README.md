@@ -38,7 +38,8 @@ kubectl -n flux create secret generic google-oauth \
   --from-file=OAUTH2_PROXY_GOOGLE_GROUP \
   --from-literal=OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -base64 32 | head -c 32)
 
-kubectl -n flux create secret generic google-service-account-json --from-file=service-account.json
+kubectl create ns oauth2-proxy
+kubectl -n oauth2-proxy create secret generic google-service-account-json --from-file=service-account.json
 
 # init restic password for minecraft backups
 kubectl -n flux create secret generic restic-password --from-literal=RESTIC_PASSWORD=$(openssl rand -hex 10)
