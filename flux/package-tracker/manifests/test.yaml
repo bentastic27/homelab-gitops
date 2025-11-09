@@ -1,0 +1,53 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: test
+  namespace: package-tracker
+spec:
+  hostnames:
+  - testpt.beansnet.net
+  parentRefs:
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: internal-gateway
+    namespace: istio-system
+    sectionName: https
+  rules:
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: package-tracker
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: oauth2-proxy
+      namespace: oauth2-proxy
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /oauth2
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: ext-authz
+  namespace: package-tracker
+spec:
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: package-tracker
+  action: CUSTOM
+  provider:
+    name: oauth2-proxy
+  rules:
+  - to:
+    - operation:
+        paths: ["/"]
