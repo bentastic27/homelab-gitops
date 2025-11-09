@@ -41,7 +41,7 @@ spec:
           username: "admin"
           password: "prom-operator"
 ---
-apiVersion: gateway.networking.k8s.io/v1beta1
+apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: kiali
@@ -64,7 +64,8 @@ spec:
       filters:
       - externalAuth:
           protocol: HTTP
-          path: /oauth2/auth
+          http:
+            path: /oauth2/auth
           backendRef:
             group: ""
             kind: Service
