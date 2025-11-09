@@ -113,7 +113,9 @@ spec:
     filters:
     - type: URLRewrite
       urlRewrite:
-        path: /
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: /
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
