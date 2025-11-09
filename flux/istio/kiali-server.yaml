@@ -62,7 +62,7 @@ spec:
       name: kiali
       port: 20001
       filters:
-        externalAuth:
+      - externalAuth:
           protocol: HTTP
           path: /oauth2/auth
           backendRef:
