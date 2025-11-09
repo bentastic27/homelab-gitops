@@ -25,3 +25,14 @@ spec:
     - path:
         type: PathPrefix
         value: /oauth2
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: oauth2-proxy
+  namespace: oauth2-proxy
+spec:
+  to:
+  - group: ""
+    kind: Service
+    name: oauth2-proxy
