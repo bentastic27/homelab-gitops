@@ -4,12 +4,15 @@ metadata:
   name: oauth2-proxy
   namespace: oauth2-proxy
 spec:
-  hostnames:
-  - auth.beansnet.net
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: public-gateway
+    namespace: istio-system
+    sectionName: https
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: internal-gateway
     namespace: istio-system
     sectionName: https
   rules:
@@ -21,4 +24,4 @@ spec:
     matches:
     - path:
         type: PathPrefix
-        value: /
+        value: /oauth2
