@@ -42,7 +42,7 @@ spec:
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
     envFrom:
     - secretRef:
-        name: google-oauth
+        name: github-oauth
     metrics:
       serviceMonitor:
         namespace: prometheus
