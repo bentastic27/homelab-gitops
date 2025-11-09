@@ -32,6 +32,6 @@ spec:
       configFile: |-
         email_domains = [ "*" ]
         upstreams = [ "file:///dev/null" ]
-        github_user = bentastic27
+        github_users = bentastic27
         session_store_type = redis
         redis_connection_url = redis://valkey.oauth2-proxy.svc.cluster.local
