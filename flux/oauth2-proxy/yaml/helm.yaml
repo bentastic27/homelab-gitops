@@ -39,7 +39,7 @@ spec:
         github_users = "bentastic27"
         session_store_type = "redis"
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
-        upstreams = ["testpt.beansnet.net"]
+        upstreams = "testpt.beansnet.net"
     envFrom:
     - secretRef:
         name: github-oauth
