@@ -32,7 +32,7 @@ spec:
       configFile: |-
         email_domains = [ "*" ]
         whitelist_domains = ["*.beansnet.net", "*.int.beansnet.net"]
-        redirect_url = "https://auth.beansnet.net/oauth2/callback"
+        redirect_url = "/oauth2/callback"
         provider = "github"
         github_org = ""
         github_users = "bentastic27"
