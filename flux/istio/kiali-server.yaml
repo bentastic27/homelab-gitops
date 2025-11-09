@@ -133,5 +133,5 @@ spec:
   rules:
   - to:
     - operation:
-        notPrinciples:
+        notPrincipals:
         - cluster.local/ns/istio-system/sa/internal-gateway-istio
