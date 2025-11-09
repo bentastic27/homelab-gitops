@@ -18,15 +18,3 @@ spec:
       kind: Service
       name: package-tracker
       port: 80
-      filters:
-      - type: ExternalAuth
-        externalAuth:
-          protocol: HTTP
-          http:
-            path: /oauth2/auth
-          backendRef:
-            group: ""
-            kind: Service
-            name: oauth2-proxy
-            namespace: oauth2-proxy
-            port: 80
