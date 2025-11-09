@@ -16,3 +16,5 @@ spec:
       name: github-oauth
     - kind: Secret
       name: google-oauth
+    - kind: Secret
+      name: google-service-account-json

@@ -3,3 +3,4 @@ accessKeyId
 secretAccessKey
 OAUTH2_PROXY*
 .vscode
+*.json

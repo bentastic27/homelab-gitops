@@ -29,8 +29,12 @@ spec:
       interval: 5m
   values:
     config:
+      google:
+        serviceAccountJson: ${service-account.json}
       configFile: |-
-        email_domains = [ "*" ]
+        email_domains = ["*"]
+        cookie_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
+        whitelist_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
         redirect_url = "/oauth2/callback"
         provider = "google"
         session_store_type = "redis"
