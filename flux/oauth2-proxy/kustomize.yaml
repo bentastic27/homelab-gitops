@@ -1,0 +1,12 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: oauth2-proxy
+  namespace: flux
+spec:
+  interval: 10m0s
+  path: "./flux/oauth2-proxy/yaml"
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux
