@@ -133,5 +133,5 @@ spec:
   rules:
   - from:
     - source:
-        notRemoteIpBlocks:
-        - "${publicIp:=0.0.0.0/0}"
+        notServiceAccounts:
+        - istio-system/internal-gateway-istio
