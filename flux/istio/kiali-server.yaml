@@ -61,18 +61,6 @@ spec:
       kind: Service
       name: kiali
       port: 20001
-      filters:
-      - type: ExternalAuth
-        externalAuth:
-          protocol: HTTP
-          http:
-            path: /oauth2/auth
-          backendRef:
-            group: ""
-            kind: Service
-            name: oauth2-proxy
-            namespace: oauth2-proxy
-            port: 80
     matches:
     - path:
         type: PathPrefix
