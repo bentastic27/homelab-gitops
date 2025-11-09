@@ -35,6 +35,7 @@ spec:
         redirect_url = "/oauth2/callback"
         relative_redirect_url = true
         provider = "google"
+        google-use-application-default-credentials = true
         github_org = ""
         github_users = "bentastic27"
         session_store_type = "redis"
