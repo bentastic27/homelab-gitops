@@ -22,9 +22,10 @@ kind: AuthorizationPolicy
 metadata:
   name: ext-authz
 spec:
-  selector:
-    matchLabels:
-      app: httpbin
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: package-tracker
   action: CUSTOM
   provider:
     name: oauth2-proxy
