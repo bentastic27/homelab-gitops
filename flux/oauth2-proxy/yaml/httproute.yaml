@@ -29,12 +29,13 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
 metadata:
-  name: oauth2-proxy
+  name: kiali
   namespace: oauth2-proxy
 spec:
   from:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
+    name: kiali
   to:
   - group: ""
     kind: Service
