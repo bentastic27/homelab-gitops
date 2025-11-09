@@ -41,6 +41,14 @@ spec:
     envFrom:
     - secretRef:
         name: github-oauth
+    metrics:
+      serviceMonitor:
+        namespace: prometheus
+    customLabels:
+      istio.io/ingress-use-waypoint: "true"
+      istio.io/dataplane-mode: ambient
+      istio.io/use-waypoint: shared-waypoint
+      istio.io/use-waypoint-namespace: istio-system
   postRenderers:
   - kustomize:
       patches:
