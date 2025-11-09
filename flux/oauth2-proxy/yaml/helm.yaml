@@ -27,3 +27,9 @@ spec:
         kind: HelmRepository
         name: oauth2-proxy
       interval: 5m
+  values:
+    config:
+      configFile: |-
+        github_user: bentastic27
+        session_store_type: redis
+        redis_connection_url: redis://valkey.oauth2-proxy.svc.cluster.local
