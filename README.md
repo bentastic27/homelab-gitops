@@ -30,7 +30,7 @@ kubectl -n flux create secret generic route53-credentials-secret --from-file=acc
 echo -n clientid > OAUTH2_PROXY_CLIENT_ID
 echo -n clientsecret > OAUTH2_PROXY_CLIENT_SECRET
 echo -n google-admin-email > OAUTH2_PROXY_GOOGLE_ADMIN_EMAIL
-echo -n google-GROUP > OAUTH2_PROXY_GOOGLE_GROUP
+echo -n google-group > OAUTH2_PROXY_GOOGLE_GROUP
 kubectl -n flux create secret generic google-oauth \
   --from-file=OAUTH2_PROXY_CLIENT_ID \
   --from-file=OAUTH2_PROXY_CLIENT_SECRET \

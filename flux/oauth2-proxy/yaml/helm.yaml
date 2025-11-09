@@ -31,15 +31,13 @@ spec:
     config:
       configFile: |-
         email_domains = [ "*" ]
-        redirect_url = "https://beansnet.net/oauth2/callback"
-        provider = "github"
-        github_org = ""
-        github_users = "bentastic27"
+        redirect_url = "/oauth2/callback"
+        provider = "google"
         session_store_type = "redis"
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
     envFrom:
     - secretRef:
-        name: github-oauth
+        name: google-oauth
     metrics:
       serviceMonitor:
         namespace: prometheus
