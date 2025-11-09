@@ -5,6 +5,10 @@ metadata:
   namespace: oauth2-proxy
   labels:
     app: valkey
+    istio.io/dataplane-mode: ambient
+    istio.io/ingress-use-waypoint: "true"
+    istio.io/use-waypoint: shared-waypoint
+    istio.io/use-waypoint-namespace: istio-system
 spec:
   ports:
   - port: 6379
@@ -28,6 +32,10 @@ spec:
     metadata:
       labels:
         app: valkey
+        istio.io/dataplane-mode: ambient
+        istio.io/ingress-use-waypoint: "true"
+        istio.io/use-waypoint: shared-waypoint
+        istio.io/use-waypoint-namespace: istio-system
     spec:
       containers:
       - name: valkey
