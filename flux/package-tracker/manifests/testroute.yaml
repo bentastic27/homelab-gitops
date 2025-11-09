@@ -14,7 +14,6 @@ spec:
     sectionName: https
   rules:
   - backendRefs:
-  - backendRefs:
     - group: ""
       kind: Service
       name: package-tracker
