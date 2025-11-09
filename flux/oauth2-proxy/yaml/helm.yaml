@@ -30,7 +30,7 @@ spec:
   values:
     config:
       google:
-        serviceAccountJson: ${service-account-json}
+        serviceAccountJson: ${serviceAccountJson}
       configFile: |-
         email_domains = ["*"]
         cookie_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
