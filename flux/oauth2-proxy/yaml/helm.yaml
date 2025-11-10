@@ -39,11 +39,14 @@ spec:
         provider = "keycloak-oidc"
         oidc_issuer_url = "https://keycloak.beansnet.net/realms/master"
         allowed_groups = ["/oauth2-proxy"]
+        session_store_type = "redis"
+        redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
     envFrom:
     - secretRef:
         name: keycloak
     metrics:
       serviceMonitor:
+        enabled: true
         namespace: prometheus
     customLabels:
       istio.io/ingress-use-waypoint: "true"
