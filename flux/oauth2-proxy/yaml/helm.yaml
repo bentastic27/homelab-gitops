@@ -36,7 +36,7 @@ spec:
         redirect_url = "/oauth2/callback"
         relative_redirect_url = true
         provider = "keycloak-oidc"
-        oidc_issuer_url = "http://keycloak.keycloak.svc.cluster.local/realms/master"
+        oidc_issuer_url = "https://keycloak.int.beansnet.net/realms/master"
         allowed_groups = ["oauth2-proxy"]
         session_store_type = "redis"
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
