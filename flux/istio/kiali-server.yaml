@@ -90,7 +90,7 @@ spec:
       externalAuth:
         protocol: HTTP
         backendRef:
-        - group: ""
+          group: ""
           kind: Service
           name: oauth2-proxy
           namespace: oauth2-proxy
