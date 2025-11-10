@@ -85,6 +85,30 @@ spec:
     - path:
         type: PathPrefix
         value: /
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: oauth2-proxy
+      namespace: oauth2-proxy
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /oauth2
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: istio-system
+  namespace: oauth2-proxy
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: istio-sytem
+  to:
+  - group: ""
+    kind: Service
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
