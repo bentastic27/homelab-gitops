@@ -19,3 +19,4 @@ resources:
 - package-tracker
 - kubernetes-secrets-generator.yaml
 - oauth2-proxy
+- keycloak
