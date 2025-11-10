@@ -15,7 +15,7 @@ spec:
       name: postgresql
       key: postgres-password
   http:
-    httpEnabled: false
+    httpEnabled: true
   hostname:
     hostname: keycloak.beansnet.net
   proxy:
