@@ -16,8 +16,4 @@ spec:
   postBuild:
     substituteFrom:
     - kind: Secret
-      name: github-oauth
-    - kind: Secret
-      name: google-oauth
-    - kind: Secret
-      name: google-service-account-json
+      name: keycloak

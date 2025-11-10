@@ -26,16 +26,12 @@ echo -n secret-access-key > secretAccessKey
 kubectl -n flux create secret generic route53-credentials-secret --from-file=accessKeyId --from-file=secretAccessKey
 
 # oath2-proxy secret:
-# https://console.cloud.google.com/auth/clients
+# https://oauth2-proxy.github.io/oauth2-proxy/configuration/providers/keycloak_oidc/
 echo -n clientid > OAUTH2_PROXY_CLIENT_ID
 echo -n clientsecret > OAUTH2_PROXY_CLIENT_SECRET
-echo -n google-admin-email > OAUTH2_PROXY_GOOGLE_ADMIN_EMAIL
-echo -n google-group > OAUTH2_PROXY_GOOGLE_GROUP
-kubectl -n flux create secret generic google-oauth \
+kubectl -n flux create secret generic keycloak \
   --from-file=OAUTH2_PROXY_CLIENT_ID \
   --from-file=OAUTH2_PROXY_CLIENT_SECRET \
-  --from-file=OAUTH2_PROXY_GOOGLE_ADMIN_EMAIL \
-  --from-file=OAUTH2_PROXY_GOOGLE_GROUP \
   --from-literal=OAUTH2_PROXY_COOKIE_SECRET=$(openssl rand -base64 32 | head -c 32)
 
 kubectl create ns oauth2-proxy
