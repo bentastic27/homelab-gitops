@@ -32,6 +32,7 @@ spec:
       configFile: |-
         email_domains = ["*"]
         upstreams = "static://200"
+        reverse_proxy = true
         cookie_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
         whitelist_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
         redirect_url = "/oauth2/callback"
