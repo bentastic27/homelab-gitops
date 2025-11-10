@@ -127,4 +127,3 @@ spec:
   - to:
     - operation:
         paths: ["/"]
-        notPaths: ["/oauth2"]
