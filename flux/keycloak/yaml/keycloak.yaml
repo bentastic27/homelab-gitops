@@ -10,7 +10,7 @@ spec:
   targetNamespace: keycloak
   chart:
     spec:
-      chart: postgresql
+      chart: keycloak
       version: '25.2.0'
       sourceRef:
         kind: HelmRepository
