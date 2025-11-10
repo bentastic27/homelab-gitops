@@ -28,22 +28,14 @@ spec:
           memory: 512Mi
     networkPolicy:
       enabled: false
-  # postRenderers:
-  # - kustomize:
-  #     patches:
-  #     - target:
-  #         version: v1
-  #         kind: Service
-  #         name: mariadb
-  #       patch: |
-  #         - op: add
-  #           path: /metadata/labels/istio.io~1ingress-use-waypoint
-  #           value: "true"
-  #     - target:
-  #         version: v1
-  #         kind: Service
-  #         name: mariadb-headless
-  #       patch: |
-  #         - op: add
-  #           path: /metadata/labels/istio.io~1ingress-use-waypoint
-  #           value: "true"
+  postRenderers:
+  - kustomize:
+      patches:
+      - target:
+          version: v1
+          kind: Secret
+          name: postgresql
+        patch: |
+          - op: add
+            path: /stringData/user
+            value: "keycloak"
