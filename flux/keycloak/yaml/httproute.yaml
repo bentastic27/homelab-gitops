@@ -6,10 +6,16 @@ metadata:
 spec:
   hostnames:
   - keycloak.int.beansnet.net
+  - keycloak.beansnet.net
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: internal-gateway
+    namespace: istio-system
+    sectionName: https
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: public-gateway
     namespace: istio-system
     sectionName: https
   rules:

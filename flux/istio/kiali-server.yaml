@@ -136,4 +136,4 @@ spec:
   rules:
   - to:
     - operation:
-        notPaths: ["/oauth2**"]
+        paths: ["/"]

@@ -37,7 +37,7 @@ spec:
         whitelist_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
         redirect_url = "/oauth2/callback"
         provider = "keycloak-oidc"
-        oidc_issuer_url = "https://keycloak.int.beansnet.net/realms/master"
+        oidc_issuer_url = "https://keycloak.beansnet.net/realms/master"
         allowed_groups = ["/oauth2-proxy"]
     envFrom:
     - secretRef:
