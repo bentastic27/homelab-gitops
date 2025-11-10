@@ -49,13 +49,13 @@ spec:
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
-  name: ext-authz
+  name: {{ .Release.Name }}-ext-authz
   namespace: {{ .Release.Namespace }}
 spec:
   targetRefs:
   - group: ""
     kind: Service
-    name: kiali
+    name: {{ .Values.targetService.name }}
   action: CUSTOM
   provider:
     name: oauth2-proxy
