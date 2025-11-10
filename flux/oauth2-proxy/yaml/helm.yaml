@@ -36,7 +36,7 @@ spec:
         redirect_url = "/oauth2/callback"
         relative_redirect_url = true
         provider = "keycloak-oidc"
-        allowed-role = "admin"
+        allowed_role = "admin"
         session_store_type = "redis"
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
     envFrom:
