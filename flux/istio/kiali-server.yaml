@@ -136,4 +136,4 @@ spec:
   rules:
   - to:
     - operation:
-        paths: ["/kiali"]
+        notPaths: ["/oauth2**"]
