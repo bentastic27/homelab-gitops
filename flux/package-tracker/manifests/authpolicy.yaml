@@ -12,8 +12,6 @@ spec:
   rules:
   - from:
     - source:
-        remoteIpBlocks:
-        - "${publicIp:=0.0.0.0/0}"
         namespaces:
         - istio-system
 ---

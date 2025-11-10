@@ -14,6 +14,7 @@ spec:
     kind: HelmChart
     name: base-components
   values:
+    auth: true
     hostnames:
     - package-tracker.beansnet.net
     targetService:
