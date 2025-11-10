@@ -37,5 +37,6 @@ spec:
           name: postgresql
         patch: |
           - op: add
-            path: /stringData/user
-            value: "keycloak"
+            path: /stringData
+            value:
+              user: keycloak
