@@ -34,7 +34,6 @@ spec:
         cookie_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
         whitelist_domains = ["beansnet.net", ".beansnet.net", "int.beansnet.net", ".int.beansnet.net"]
         redirect_url = "/oauth2/callback"
-        relative_redirect_url = true
         provider = "keycloak-oidc"
         oidc_issuer_url = "https://keycloak.int.beansnet.net/realms/master"
         allowed_groups = ["oauth2-proxy"]
