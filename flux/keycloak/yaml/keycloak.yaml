@@ -1,0 +1,28 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: keycloak
+  targetNamespace: keycloak
+  chart:
+    spec:
+      chart: postgresql
+      version: '25.2.0'
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+      interval: 5m
+  values:
+    httpEnabled: true
+    proxyHeaders: xforwarded
+    tls:
+      enabled: false
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        namespace: prometheus

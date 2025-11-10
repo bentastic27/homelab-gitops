@@ -1,21 +1,6 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: keycloak-operator
-  namespace: flux
-spec:
-  interval: 10m0s
-  path: "./flux/keycloak/operator"
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: flux
-  dependsOn:
-  - name: istio
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
   name: keycloak
   namespace: flux
 spec:
@@ -27,4 +12,3 @@ spec:
     name: flux
   dependsOn:
   - name: istio
-  - name: keycloak-operator
