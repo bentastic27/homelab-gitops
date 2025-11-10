@@ -17,6 +17,8 @@ spec:
         name: bitnami
       interval: 5m
   values:
+    global:
+      defaultStorageClass: openebs-hostpath
     httpEnabled: true
     proxyHeaders: xforwarded
     tls:
