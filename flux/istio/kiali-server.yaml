@@ -85,16 +85,16 @@ spec:
     - path:
         type: PathPrefix
         value: /
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: oauth2-proxy
-      namespace: oauth2-proxy
-      port: 80
-    matches:
-    - path:
-        type: PathPrefix
-        value: /oauth2
+    filters:
+    - type: ExternalAuth
+      externalAuth:
+        protocol: HTTP
+        backendRef:
+        - group: ""
+          kind: Service
+          name: oauth2-proxy
+          namespace: oauth2-proxy
+          port: 80
 ---
 apiVersion: gateway.networking.k8s.io/v1beta1
 kind: ReferenceGrant
@@ -110,20 +110,20 @@ spec:
   - group: ""
     kind: Service
 ---
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: ext-authz
-  namespace: istio-system
-spec:
-  targetRefs:
-  - group: ""
-    kind: Service
-    name: kiali
-  action: CUSTOM
-  provider:
-    name: oauth2-proxy
-  rules:
-  - to:
-    - operation:
-        paths: ["/"]
+# apiVersion: security.istio.io/v1
+# kind: AuthorizationPolicy
+# metadata:
+#   name: ext-authz
+#   namespace: istio-system
+# spec:
+#   targetRefs:
+#   - group: ""
+#     kind: Service
+#     name: kiali
+#   action: CUSTOM
+#   provider:
+#     name: oauth2-proxy
+#   rules:
+#   - to:
+#     - operation:
+#         paths: ["/"]
