@@ -105,7 +105,7 @@ spec:
   from:
   - group: gateway.networking.k8s.io
     kind: HTTPRoute
-    namespace: istio-sytem
+    namespace: istio-system
   to:
   - group: ""
     kind: Service
@@ -127,3 +127,4 @@ spec:
   - to:
     - operation:
         paths: ["/"]
+        notPaths: ["/oauth2"]
