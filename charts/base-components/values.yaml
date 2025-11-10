@@ -3,15 +3,8 @@ hostnames:
 targetService:
   name: some-service
   port: 80
-authPolicy: # todo
-  allowAll: false
+auth: false
 parentRefs:
-  http:
-  - name: public-gateway
-    namespace: istio-system
-    group: gateway.networking.k8s.io
-    kind: Gateway
-    sectionName: http
   https:
   - name: public-gateway
     namespace: istio-system

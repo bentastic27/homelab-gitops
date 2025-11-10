@@ -5,25 +5,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   parentRefs:
-  {{- toYaml .Values.parentRefs.http | nindent 2 }}
-  hostnames:
-  {{- range .Values.hostnames }}
-  - {{ . | quote }}
-  {{- end}}
-  rules:
-  - filters:
-    - type: RequestRedirect
-      requestRedirect:
-        scheme: https
-        statusCode: 301
----
-apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
-metadata:
-  name: {{ .Release.Name }}-https
-  namespace: {{ .Release.Namespace }}
-spec:
-  parentRefs:
   {{- toYaml .Values.parentRefs.https | nindent 2 }}
   hostnames:
   {{- range .Values.hostnames }}
@@ -37,3 +18,49 @@ spec:
     backendRefs:
     - name: {{ .Values.targetService.name }}
       port: {{ .Values.targetService.port }}
+  {{- if .Values.auth }}
+  - backendRefs:
+    - group: ""
+      kind: Service
+      name: oauth2-proxy
+      namespace: oauth2-proxy
+      port: 80
+    matches:
+    - path:
+        type: PathPrefix
+        value: /oauth2
+  {{- end }}
+{{- if .Values.auth }}
+---
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: ReferenceGrant
+metadata:
+  name: {{ .Release.Namespace }}-{{ .Release.Name }}
+  namespace: oauth2-proxy
+spec:
+  from:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    namespace: {{ .Release.Namespace }}
+  to:
+  - group: ""
+    kind: Service
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: ext-authz
+  namespace: {{ .Release.Namespace }}
+spec:
+  targetRefs:
+  - group: ""
+    kind: Service
+    name: kiali
+  action: CUSTOM
+  provider:
+    name: oauth2-proxy
+  rules:
+  - to:
+    - operation:
+        paths: ["/"]
+{{- end }}
