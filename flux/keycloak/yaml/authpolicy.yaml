@@ -19,6 +19,28 @@ spec:
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
+ name: restrict-admin
+ namespace: keycloak
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: keycloak-service
+  rules:
+  - from:
+    - source:
+        remoteIpBlocks:
+        - "${publicIp:=0.0.0.0/0}"
+        - "192.168.0.0/16"
+    to:
+    - operation:
+        paths:
+        - "/admin*"
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
   name: postgres
   namespace: keycloak
 spec:
