@@ -22,8 +22,8 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: keycloak
-      port: 80
+      name: keycloak-service
+      port: 8080
     matches:
     - path:
         type: PathPrefix

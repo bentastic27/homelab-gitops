@@ -1,0 +1,24 @@
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  instances: 1
+  db:
+    vendor: postgres
+    host: postgres.keycloak.svc.cluster.local
+    port: 5432
+    database: keycloak
+    usernameSecret:
+      name: postgres
+      key: username
+    passwordSecret:
+      name: postgres
+      key: password
+  http:
+    httpEnabled: true
+  hostname:
+    strict: false
+  proxy:
+    headers: xforwarded
