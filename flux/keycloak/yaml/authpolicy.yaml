@@ -8,7 +8,7 @@ spec:
   targetRefs:
   - kind: Service
     group: ""
-    name: keycloak
+    name: keycloak-service
   rules:
   - from:
     - source:
@@ -37,6 +37,10 @@ spec:
     to:
     - operation:
         paths:
+        - "/admin*"
+  - to:
+    - operation:
+        notPaths:
         - "/admin*"
 ---
 apiVersion: security.istio.io/v1
