@@ -18,6 +18,8 @@ spec:
       key: password
   http:
     httpEnabled: true
+    labels:
+      istio.io/ingress-use-waypoint: "true"
   hostname:
     strict: false
   proxy:
