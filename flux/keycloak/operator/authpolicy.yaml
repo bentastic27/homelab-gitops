@@ -13,10 +13,6 @@ spec:
     - operation:
         hosts:
         - "10.43.0.1"
-  - from:
-    - source:
-        namespaces:
-        - keycloak
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
