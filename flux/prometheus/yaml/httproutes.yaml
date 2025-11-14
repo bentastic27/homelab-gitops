@@ -39,7 +39,7 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: prometheus-kube-prometheus-prometheus
+      name: prometheus-httproute
       port: 9090
       weight: 1
     matches:
