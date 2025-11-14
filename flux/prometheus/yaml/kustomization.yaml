@@ -5,3 +5,5 @@ resources:
 - helmrelease.yaml
 - istio.yaml
 - secret.yaml
+- authpolicy.yaml
+- httproutes.yaml
