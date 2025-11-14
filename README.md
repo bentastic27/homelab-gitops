@@ -11,6 +11,13 @@ tls-san:
 - "192.168.1.10"
 disable: rke2-ingress-nginx
 disable-cloud-controller: true
+etcd-expose-metrics: true
+kube-scheduler-arg:
+- "--bind-address=0.0.0.0"
+kube-controller-manager-arg:
+- "--bind-address=0.0.0.0"
+kube-proxy-arg:
+- "--metrics-bind-address=0.0.0.0:10249"
 ```
 
 ## Init
