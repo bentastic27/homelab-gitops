@@ -42,6 +42,7 @@ spec:
       grafana:
         enabled: true
         internal_url: http://prometheus-grafana.prometheus.svc.cluster.local:80/
+        external_url: https://grafana.int.beansnet.net/
         auth:
           username: "admin"
           password: "prom-operator"
