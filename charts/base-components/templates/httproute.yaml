@@ -18,33 +18,7 @@ spec:
     backendRefs:
     - name: {{ .Values.targetService.name }}
       port: {{ .Values.targetService.port }}
-  {{- if .Values.auth }}
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: oauth2-proxy
-      namespace: oauth2-proxy
-      port: 80
-    matches:
-    - path:
-        type: PathPrefix
-        value: /oauth2
-  {{- end }}
 {{- if .Values.auth }}
----
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: {{ .Release.Namespace }}-{{ .Release.Name }}
-  namespace: oauth2-proxy
-spec:
-  from:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    namespace: {{ .Release.Namespace }}
-  to:
-  - group: ""
-    kind: Service
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
