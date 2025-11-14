@@ -60,3 +60,7 @@ spec:
             group: gateway.networking.k8s.io
             kind: Gateway
             sectionName: https
+    kubeProxy:
+      service:
+        selector:
+          component: kube-proxy
