@@ -7,6 +7,7 @@ spec:
   hostnames:
   - "prometheus.int.beansnet.net"
   - "kiali.int.beansnet.net"
+  - "package-tracker.beansnet.net"
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
