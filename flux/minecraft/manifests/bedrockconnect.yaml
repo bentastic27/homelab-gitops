@@ -48,7 +48,7 @@ spec:
     spec:
       containers:
       - name: main
-        image: openjdk:26
+        image: eclipse-temurin:21-jre
         command: ["/bin/sh"]
         args:
         - -c
