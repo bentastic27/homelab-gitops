@@ -31,6 +31,11 @@ spec:
       strategy: anonymous
     deployment:
       view_only_mode: true
+      pod_labels:
+        istio.io/dataplane-mode: ambient
+        istio.io/ingress-use-waypoint: "true"
+        istio.io/use-waypoint: shared-waypoint
+        istio.io/use-waypoint-namespace: istio-system
     external_services:
       prometheus:
         url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090/
@@ -85,40 +90,6 @@ spec:
     - path:
         type: PathPrefix
         value: /
-  #   filters:
-  #   - type: ExternalAuth
-  #     externalAuth:
-  #       protocol: HTTP
-  #       backendRef:
-  #         group: ""
-  #         kind: Service
-  #         name: oauth2-proxy
-  #         namespace: oauth2-proxy
-  #         port: 80
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: oauth2-proxy
-      namespace: oauth2-proxy
-      port: 80
-    matches:
-    - path:
-        type: PathPrefix
-        value: /oauth2
----
-apiVersion: gateway.networking.k8s.io/v1beta1
-kind: ReferenceGrant
-metadata:
-  name: istio-system
-  namespace: oauth2-proxy
-spec:
-  from:
-  - group: gateway.networking.k8s.io
-    kind: HTTPRoute
-    namespace: istio-system
-  to:
-  - group: ""
-    kind: Service
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy

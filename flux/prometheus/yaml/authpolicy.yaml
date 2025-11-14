@@ -1,0 +1,31 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: ext-authz
+  namespace: prometheus
+spec:
+  targetRefs:
+  - group: ""
+    kind: Service
+    name: prometheus-httproute
+  - group: ""
+    kind: Service
+    name: grafana-httproute
+  action: CUSTOM
+  provider:
+    name: oauth2-proxy
+  rules:
+  - {}
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-otherwise
+  namespace: prometheus
+spec:
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - istio-system
