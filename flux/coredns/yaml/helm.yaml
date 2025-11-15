@@ -50,10 +50,11 @@ spec:
           192.168.1.12 play.galaxite.net
           192.168.1.12 play.enchanted.gg
           192.168.1.12 mco.cubecraft.net
+          fallthrough
       - name: prometheus
         parameters: 0.0.0.0:9153
       - name: forward
-        parameters: . /etc/resolv.conf
+        parameters: . 8.8.8.8:53 8.8.4.4:53
       - name: cache
         parameters: 30
       - name: loop
