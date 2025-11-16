@@ -27,7 +27,12 @@ spec:
   values:
     provider:
       name: aws
-    sources: []
+    sources:
+    - gateway-grpcroute
+    - gateway-httproute
+    - gateway-tcproute
+    - gateway-tlsroute
+    - gateway-udproute
     env:
     - name: AWS_REGION
       value: us-east-2

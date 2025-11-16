@@ -3,6 +3,8 @@ kind: HTTPRoute
 metadata:
   name: oauth2-proxy
   namespace: oauth2-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/controller: ignore
 spec:
   hostnames:
   - "prometheus.int.beansnet.net"
