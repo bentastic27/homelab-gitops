@@ -43,6 +43,14 @@ spec:
         secretKeyRef:
           name: aws-creds
           key: AWS_SECRET_ACCESS_KEY
+    prometheus:
+      service:
+        enabled: true
+      monitor:
+        enabled: true
+        namespace: prometheus
+    livenessProbe:
+      initialDelaySeconds: 15
     servers:
     - zones:
       - zone: .
@@ -50,6 +58,7 @@ spec:
       port: 53
       plugins:
       - name: errors
+      - name: log
       - name: health
         configBlock: |-
           lameduck 10s
