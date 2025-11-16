@@ -30,7 +30,9 @@ kubectl create ns flux
 # init cert manager IAM
 echo -n access-key-id > accessKeyId
 echo -n secret-access-key > secretAccessKey
-kubectl -n flux create secret generic route53-credentials-secret --from-file=accessKeyId --from-file=secretAccessKey
+echo -n hostedZoneId > hostedZoneId
+echo -n example.com > zone
+kubectl -n flux create secret generic route53-credentials-secret --from-file=accessKeyId --from-file=secretAccessKey --from-file=hostedZoneId
 
 # oath2-proxy secret:
 # https://oauth2-proxy.github.io/oauth2-proxy/configuration/providers/keycloak_oidc/

@@ -30,6 +30,17 @@ spec:
     service:
       annotations:
         metallb.universe.tf/loadBalancerIPs: 192.168.1.11
+    env:
+    - name: AWS_ACCESS_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: aws-creds
+          key: AWS_ACCESS_KEY_ID
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: aws-creds
+          key: AWS_SECRET_ACCESS_KEY
     servers:
     - zones:
       - zone: .
@@ -41,6 +52,11 @@ spec:
         configBlock: |-
           lameduck 10s
       - name: ready
+      - name: route53
+        parameters: ${zone}:${hostedZoneId}
+        configBlock: |-
+          refresh 3m
+          fallthrough
       - name: hosts
         configBlock: |-
           192.168.1.12 geo.hivebedrock.network

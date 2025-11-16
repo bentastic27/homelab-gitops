@@ -4,3 +4,5 @@ secretAccessKey
 OAUTH2_PROXY*
 .vscode
 *.json
+hostedZoneId
+zone
