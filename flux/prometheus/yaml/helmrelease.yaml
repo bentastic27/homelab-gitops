@@ -38,6 +38,9 @@ spec:
         existingSecret: grafana-auth
         userKey: username
         passwordKey: password
+      persistence:
+        enabled: true
+        storageClassName: openebs-hostpath
     kubeProxy:
       service:
         selector:
