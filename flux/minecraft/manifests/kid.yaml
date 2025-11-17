@@ -44,7 +44,7 @@ metadata:
   name: kid-bedrock
   namespace: minecraft
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: kid-bedrock
