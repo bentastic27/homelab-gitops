@@ -53,7 +53,7 @@ spec:
         args:
         - -c
         - |
-          curl -L -o BedrockConnect-1.0-SNAPSHOT.jar https://github.com/Pugmatt/BedrockConnect/releases/download/1.61/BedrockConnect-1.0-SNAPSHOT.jar
+          curl -L -o BedrockConnect-1.0-SNAPSHOT.jar https://github.com/Pugmatt/BedrockConnect/releases/download/1.62/BedrockConnect-1.0-SNAPSHOT.jar
           java -Xms512M -Xmx512M -jar BedrockConnect-1.0-SNAPSHOT.jar nodb=true custom_servers=/app/custom_servers.json featured_servers=false
         imagePullPolicy: Always
         resources:
