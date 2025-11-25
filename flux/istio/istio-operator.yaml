@@ -1,41 +1,91 @@
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: installer
+  namespace: istio-system
+data:
+  istio-operator.yaml: |
+    apiVersion: install.istio.io/v1alpha1
+    kind: IstioOperator
+    spec:
+      profile: ambient
+      meshConfig:
+        accessLogFile: /dev/stdout
+        enableTracing: true
+        defaultConfig:
+          interceptionMode: TPROXY
+          gatewayTopology:
+            numTrustedProxies: 0
+          proxyMetadata:
+            ISTIO_META_DNS_CAPTURE: "true"
+            PILOT_ENABLE_IP_AUTOALLOCATE: "true"
+        extensionProviders:
+        - name: "oauth2-proxy"
+          envoyExtAuthzHttp:
+            service: "oauth2-proxy.oauth2-proxy.svc.cluster.local"
+            port: "80"
+            includeRequestHeadersInCheck: ["authorization", "cookie"]
+            headersToUpstreamOnAllow: ["authorization", "path", "x-auth-request-user", "x-auth-request-email", "x-auth-request-access-token"]
+            headersToDownstreamOnAllow: ["set-cookie"]
+            headersToDownstreamOnDeny: ["content-type", "set-cookie"]
+      components:
+        cni:
+          namespace: istio-system
+          enabled: true
+      values:
+        pilot:
+          env:
+            ENABLE_NATIVE_SIDECARS: "true"
+            PILOT_ENABLE_ALPHA_GATEWAY_API: "true"
+        global:
+          proxy:
+            resources:
+              requests:
+                cpu: "0"
+                memory: "0"
+              limits:
+                cpu: 2000m
+                memory: 1024Mi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: installer
+  namespace: istio-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: istio-installer
 spec:
-  profile: ambient
-  meshConfig:
-    accessLogFile: /dev/stdout
-    enableTracing: true
-    defaultConfig:
-      interceptionMode: TPROXY
-      gatewayTopology:
-        numTrustedProxies: 0
-      proxyMetadata:
-        ISTIO_META_DNS_CAPTURE: "true"
-        PILOT_ENABLE_IP_AUTOALLOCATE: "true"
-    extensionProviders:
-    - name: "oauth2-proxy"
-      envoyExtAuthzHttp:
-        service: "oauth2-proxy.oauth2-proxy.svc.cluster.local"
-        port: "80"
-        includeRequestHeadersInCheck: ["authorization", "cookie"]
-        headersToUpstreamOnAllow: ["authorization", "path", "x-auth-request-user", "x-auth-request-email", "x-auth-request-access-token"]
-        headersToDownstreamOnAllow: ["set-cookie"]
-        headersToDownstreamOnDeny: ["content-type", "set-cookie"]
-  components:
-    cni:
-      namespace: istio-system
-      enabled: true
-  values:
-    pilot:
-      env:
-        ENABLE_NATIVE_SIDECARS: "true"
-        PILOT_ENABLE_ALPHA_GATEWAY_API: "true"
-    global:
-      proxy:
-        resources:
-          requests:
-            cpu: "0"
-            memory: "0"
-          limits:
-            cpu: 2000m
-            memory: 1024Mi
+subjects:
+- kind: ServiceAccount
+  name: installer
+  namespace: istio-system
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: installer
+  namespace: istio-system
+spec:
+  template:
+    spec:
+      serviceAccountName: installer
+      containers:
+      - name: istioctl
+        image: istio/istioctl:1.28.0-distroless
+        command: ["istioctl",  "install", "-y", "-f", "/mnt/istio-operator.yaml"]
+        volumeMounts:
+        - name: config
+          mountPath: /mnt
+      restartPolicy: Never
+      volumes:
+      - name: config
+        configMap:
+          name: installer
+  backoffLimit: 4
