@@ -18,7 +18,7 @@ data:
   ALLOW_CHEATS: "true"
   SERVER_NAME: "KID"
   # https://minecraft.wiki/w/Bedrock_Edition_version_history
-  VERSION: "1.21.101.1"
+  VERSION: "1.21.124.2"
   ONLINE_MODE: "false"
 ---
 kind: PersistentVolumeClaim
