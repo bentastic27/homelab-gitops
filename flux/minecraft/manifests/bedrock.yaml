@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: kid-bedrock
+  name: bedrock
   namespace: minecraft
   labels:
-    app: kid-bedrock
+    app: bedrock
 data:
   UID: "1000"
   GID: "1000"
@@ -24,10 +24,10 @@ data:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: kid-bedrock
+  name: bedrock
   namespace: minecraft
   labels:
-    app: kid-bedrock
+    app: bedrock
 spec:
   storageClassName: openebs-hostpath
   accessModes:
@@ -40,18 +40,18 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: kid-bedrock
-  name: kid-bedrock
+    app: bedrock
+  name: bedrock
   namespace: minecraft
 spec:
   replicas: 0
   selector:
     matchLabels:
-      app: kid-bedrock
+      app: bedrock
   template:
     metadata:
       labels:
-        app: kid-bedrock
+        app: bedrock
     spec:
       containers:
       - name: main
@@ -65,7 +65,7 @@ spec:
             cpu: 2
         envFrom:
         - configMapRef:
-            name: kid-bedrock
+            name: bedrock
         volumeMounts:
         - mountPath: /data
           name: data
@@ -88,20 +88,20 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: kid-bedrock
+          claimName: bedrock
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: kid-bedrock
+  name: bedrock
   namespace: minecraft
   labels:
-    app: kid-bedrock
+    app: bedrock
   annotations:
     metallb.universe.tf/loadBalancerIPs: 192.168.1.14
 spec:
   selector:
-    app: kid-bedrock
+    app: bedrock
   ports:
   - port: 19132
     protocol: UDP
