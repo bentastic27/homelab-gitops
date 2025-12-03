@@ -2,6 +2,10 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: minecraft
+  labels:
+    istio.io/dataplane-mode: ambient
+    istio.io/use-waypoint: shared-waypoint
+    istio.io/use-waypoint-namespace: istio-system
 ---
 apiVersion: v1
 kind: Secret
@@ -12,3 +16,12 @@ metadata:
 stringData:
   aws-access-key: ${accessKeyId}
   aws-secret-key: ${secretAccessKey}
+---
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: permissive-mtls
+  namespace: minecraft
+spec:
+  mtls:
+    mode: PERMISSIVE
