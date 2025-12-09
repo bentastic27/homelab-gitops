@@ -21,3 +21,4 @@ resources:
 - oauth2-proxy
 - keycloak
 - external-dns
+- otterwiki
