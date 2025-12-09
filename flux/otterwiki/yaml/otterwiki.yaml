@@ -27,3 +27,7 @@ spec:
         kind: HelmRepository
         name: otterwiki
       interval: 5m
+  values:
+    persistence:
+      size: 10Gi
+      storageClass: openebs-hostpath
