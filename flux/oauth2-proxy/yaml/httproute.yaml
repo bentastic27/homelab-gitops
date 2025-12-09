@@ -11,6 +11,8 @@ spec:
   - "kiali.int.beansnet.net"
   - "package-tracker.beansnet.net"
   - "grafana.int.beansnet.net"
+  - "otterwiki.beansnet.net"
+  - "ow.beansnet.net"
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway

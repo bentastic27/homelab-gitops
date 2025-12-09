@@ -1,0 +1,29 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: otterwiki
+  namespace: flux
+spec:
+  interval: 10m0s
+  url: https://charts.otterwiki.com
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: otterwiki
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: otterwiki
+  targetNamespace: otterwiki
+  install:
+    createNamespace: true
+  chart:
+    spec:
+      chart: otterwiki
+      version: '0.1.2'
+      sourceRef:
+        kind: HelmRepository
+        name: otterwiki
+      interval: 5m
