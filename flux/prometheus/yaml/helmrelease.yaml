@@ -19,9 +19,9 @@ spec:
         name: prometheus
       interval: 5m
   values:
-    crds:
-      upgradeJob:
-        enabled: true
+    # crds:
+    #   upgradeJob:
+    #     enabled: true
     alertmanager:
       enabled: false
     prometheus:
