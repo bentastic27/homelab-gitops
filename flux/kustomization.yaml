@@ -11,7 +11,6 @@ resources:
 - charts.yaml
 - helmrepos.yaml
 - istio-kustomization.yaml
-- wp-kustomization.yaml
 - public-ip-configmapper
 - minecraft
 - coredns

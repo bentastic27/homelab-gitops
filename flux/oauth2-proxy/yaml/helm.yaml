@@ -22,7 +22,7 @@ spec:
   chart:
     spec:
       chart: oauth2-proxy
-      version: "8.3.3"
+      version: "9.0.1"
       sourceRef:
         kind: HelmRepository
         name: oauth2-proxy
@@ -41,6 +41,7 @@ spec:
         allowed_groups = ["/oauth2-proxy"]
         session_store_type = "redis"
         redis_connection_url = "redis://valkey.oauth2-proxy.svc.cluster.local"
+        silence_ping_logging = true
     envFrom:
     - secretRef:
         name: keycloak
