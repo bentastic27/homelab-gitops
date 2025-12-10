@@ -19,5 +19,6 @@ spec:
     targetService:
       name: matchering
       port: 80
+    auth: true
   dependsOn:
   - name: cert-manager
