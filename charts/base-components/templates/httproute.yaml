@@ -36,5 +36,5 @@ spec:
   rules:
   - to:
     - operation:
-        paths: ["/"]
+        paths: ["/**"]
 {{- end }}
