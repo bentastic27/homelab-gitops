@@ -106,6 +106,4 @@ spec:
   provider:
     name: oauth2-proxy
   rules:
-  - to:
-    - operation:
-        paths: ["/**"]
+  - {}
