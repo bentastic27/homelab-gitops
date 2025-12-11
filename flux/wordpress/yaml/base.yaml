@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wordpress-base
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: wordpress-base
+  targetNamespace: wordpress
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostnames:
+    - wp.beansnet.net
+    targetService:
+      name: wordpress
+      port: 80
+    auth: true
+

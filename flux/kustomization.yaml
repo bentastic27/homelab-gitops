@@ -22,3 +22,4 @@ resources:
 - external-dns
 - otterwiki
 - k8up
+- wordpress
