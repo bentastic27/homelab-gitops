@@ -71,7 +71,7 @@ spec:
         - name: data
           mountPath: /var/www/html
         - name: config
-          mountPath: /usr/local/etc/php/php.ini
+          mountPath: /usr/local/etc/php/conf.d/custom.ini
           subPath: custom.ini
       volumes:
       - name: data
