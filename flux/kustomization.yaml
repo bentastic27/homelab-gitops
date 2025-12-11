@@ -21,3 +21,4 @@ resources:
 - keycloak
 - external-dns
 - otterwiki
+- k8up

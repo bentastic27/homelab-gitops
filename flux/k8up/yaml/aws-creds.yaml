@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  name: aws-creds
+  namespace: k8up
+stringData:
+  aws-access-key: ${accessKeyId}
+  aws-secret-key: ${secretAccessKey}
