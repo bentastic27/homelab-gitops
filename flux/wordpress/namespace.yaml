@@ -3,6 +3,6 @@ kind: Namespace
 metadata:
   name: wordpress
   labels:
-    istio.io/dataplane-mode: ambient
-    istio.io/use-waypoint: shared-waypoint
-    istio.io/use-waypoint-namespace: istio-system
+    # istio.io/dataplane-mode: ambient
+    # istio.io/use-waypoint: shared-waypoint
+    # istio.io/use-waypoint-namespace: istio-system
