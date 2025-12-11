@@ -39,6 +39,8 @@ spec:
         env:
         - name: WORDPRESS_DB_HOST
           value: mariadb
+        - name: WORDPRESS_DB_USER
+          value: root
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
