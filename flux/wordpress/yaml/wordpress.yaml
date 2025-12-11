@@ -6,6 +6,7 @@ metadata:
 data:
   custom.ini: |
     upload_max_filesize 20M
+    post_max_size 24M
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
