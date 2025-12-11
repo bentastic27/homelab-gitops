@@ -9,6 +9,21 @@ metadata:
     secret-generator.v1.mittwald.de/autogenerate: password
   labels:
     app: mariadb
+stringData:
+  username: wordpress
+  database: wordpress
+---  
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mariadb-root
+  namespace: wordpress
+  annotations:
+    secret-generator.v1.mittwald.de/type: string
+    secret-generator.v1.mittwald.de/secure: "yes"
+    secret-generator.v1.mittwald.de/autogenerate: password
+  labels:
+    app: mariadb
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -58,10 +73,25 @@ spec:
           tcpSocket:
             port: 3306
         env:
-        - name: MARIADB_ROOT_PASSWORD
+        - name: MARIADB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mariadb
+              key: password
+        - name: MARIADB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mariadb
+              key: username
+        - name: MARIADB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mariadb
+              key: database
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-root
               key: password
         ports:
         - containerPort: 3306
