@@ -17,8 +17,6 @@ spec:
   timeout: 5m
   releaseName: k8up
   targetNamespace: k8up
-  install:
-    createNamespace: true
   chart:
     spec:
       chart: k8up
