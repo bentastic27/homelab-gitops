@@ -13,6 +13,7 @@ spec:
   - "grafana.int.beansnet.net"
   - "otterwiki.beansnet.net"
   - "ow.beansnet.net"
+  - "wp.beansnet.net"
   parentRefs:
   - group: gateway.networking.k8s.io
     kind: Gateway
