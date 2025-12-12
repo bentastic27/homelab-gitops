@@ -24,3 +24,16 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: k8up
+  values:
+    k8up:
+      timezone: America/Detroit
+    metrics:
+      serviceMonitor:
+        enabled: true
+        namespace: prometheus
+      prometheusRule:
+        enabled: true
+        namespace: prometheus
+      grafanaDashboard:
+        enabled: false
+        namespace: prometheus
