@@ -23,7 +23,7 @@ spec:
       key: restic-password
     s3:
       endpoint: s3.us-east-2.amazonaws.com
-      bucket: bentastic27-homelab-buckets
+      bucket: bentastic27-homelab-backups
       accessKeyIDSecretRef:
         name: backup-creds
         key: aws-access-key
