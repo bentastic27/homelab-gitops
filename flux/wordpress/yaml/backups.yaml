@@ -10,13 +10,15 @@ stringData:
   restic-password: ${RESTIC_PASSWORD}
 ---
 apiVersion: k8up.io/v1
-kind: Backup
+kind: Schedule
 metadata:
-  name: backup-test
+  name: backup
   namespace: wordpress
 spec:
-  failedJobsHistoryLimit: 2
-  successfulJobsHistoryLimit: 2
+  backup:
+    schedule: '00 01 * * *'
+    failedJobsHistoryLimit: 2
+    successfulJobsHistoryLimit: 2
   backend:
     repoPasswordSecretRef:
       name: backup-creds
@@ -30,3 +32,9 @@ spec:
       secretAccessKeySecretRef:
         name: backup-creds
         key: aws-secret-key
+  check:
+    schedule: '0 2 * * *'
+  prune:
+    schedule: '0 3 * * *'
+    retention:
+      keepLast: 5
