@@ -57,7 +57,7 @@ spec:
       labels:
         app: mariadb
       annotations:
-        k8up.io/backupcommand: /bin/bash -c 'mysqldump -uroot -p"${MARIADB_ROOT_PASSWORD}" --all-databases'
+        k8up.io/backupcommand: /bin/bash -c 'mariadb-dump -uroot -p"${MARIADB_ROOT_PASSWORD}" --all-databases'
     spec:
       containers:
       - image: mariadb:12
