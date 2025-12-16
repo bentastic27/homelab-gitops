@@ -70,7 +70,7 @@ roleRef:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: installer
+  name: installer-1-28-1
   namespace: istio-system
 spec:
   template:
@@ -78,7 +78,7 @@ spec:
       serviceAccountName: installer
       containers:
       - name: istioctl
-        image: istio/istioctl:1.28.0-distroless
+        image: istio/istioctl:1.28.1-distroless
         command: ["istioctl",  "install", "-y", "-f", "/mnt/istio-operator.yaml"]
         volumeMounts:
         - name: config
