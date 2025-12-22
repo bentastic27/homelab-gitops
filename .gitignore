@@ -6,3 +6,4 @@ OAUTH2_PROXY*
 *.json
 hostedZoneId
 zone
+RESTIC_PASSWORD
