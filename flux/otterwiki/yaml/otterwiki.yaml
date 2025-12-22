@@ -31,6 +31,8 @@ spec:
     persistence:
       size: 10Gi
       storageClass: openebs-hostpath
+      annotations:
+        k8up.io/backup: "true"
   postRenderers:
   - kustomize:
       patches:
@@ -42,4 +44,3 @@ spec:
           - op: add
             path: /metadata/labels/istio.io~1ingress-use-waypoint
             value: "true"
-
