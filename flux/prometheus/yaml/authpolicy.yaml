@@ -30,3 +30,4 @@ spec:
         namespaces:
         - istio-system
         - prometheus
+  - to: []
