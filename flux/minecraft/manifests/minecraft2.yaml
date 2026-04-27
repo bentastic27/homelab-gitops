@@ -62,7 +62,7 @@ metadata:
   name: minecraft2
   namespace: minecraft
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: minecraft2
