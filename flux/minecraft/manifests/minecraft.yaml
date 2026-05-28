@@ -108,8 +108,6 @@ spec:
         securityContext:
           runAsUser: 1000
         env:
-        - name: DEST_DIR
-          value: "minecraft2"
         - name: PRUNE_RESTIC_RETENTION
           value: --keep-daily 7 --keep-weekly 2
         - name: TAR_COMPRESS_METHOD
@@ -117,7 +115,7 @@ spec:
         - name: BACKUP_METHOD
           value: restic
         - name: RESTIC_REPOSITORY
-          value: s3:s3.us-east-2.amazonaws.com/bentastic27-minecraft-backups/restic
+          value: s3:s3.us-east-2.amazonaws.com/bentastic27-minecraft-backups/minecraft
         - name: RESTIC_PASSWORD
           value: ${RESTIC_PASSWORD}
         - name: AWS_ACCESS_KEY_ID
