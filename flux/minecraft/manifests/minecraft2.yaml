@@ -109,6 +109,8 @@ spec:
         securityContext:
           runAsUser: 1000
         env:
+        - name: SKIP_LOCKING
+          value: "true"
         - name: PRUNE_RESTIC_RETENTION
           value: --keep-daily 7 --keep-weekly 2
         - name: TAR_COMPRESS_METHOD
