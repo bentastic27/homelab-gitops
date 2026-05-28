@@ -11,7 +11,7 @@ data:
   PLUGINS: |
     https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
     https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
-    https://github.com/ViaVersion/ViaVersion/releases/download/5.9.0/ViaVersion-5.9.0.jar
+    https://github.com/ViaVersion/ViaVersion/releases/download/5.9.1/ViaVersion-5.9.1.jar
   MEMORY: 4G
   DIFFICULTY: peaceful
   MODE: creative
@@ -99,7 +99,8 @@ spec:
             command:
             - mc-monitor
             - status
-          initialDelaySeconds: 120
+          initialDelaySeconds: 30
+          failureThreshold: 4
         livenessProbe: *probe
         tty: true
         stdin: true
