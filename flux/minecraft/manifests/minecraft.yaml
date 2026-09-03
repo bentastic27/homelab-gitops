@@ -53,6 +53,19 @@ spec:
     requests:
       storage: 1Gi
 ---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: minecraft-survival
+  namespace: minecraft
+spec:
+  storageClassName: openebs-hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -115,7 +128,7 @@ spec:
         - name: BACKUP_METHOD
           value: restic
         - name: RESTIC_REPOSITORY
-          value: s3:s3.us-east-2.amazonaws.com/bentastic27-minecraft-backups/minecraft
+          value: s3:s3.us-east-2.amazonaws.com/bentastic27-minecraft-backups/minecraft-survival
         - name: RESTIC_PASSWORD
           value: ${RESTIC_PASSWORD}
         - name: AWS_ACCESS_KEY_ID
@@ -134,7 +147,7 @@ spec:
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: minecraft
+          claimName: minecraft-survival
 ---
 apiVersion: v1
 kind: Service
