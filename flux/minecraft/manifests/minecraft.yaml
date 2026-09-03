@@ -40,6 +40,26 @@ data:
   #TICK_DISTANCE: "4"
   #MAX_THREADS: "8"
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: minecraft-survival
+  namespace: minecraft
+  labels:
+    app: minecraft
+data:
+  EULA: "TRUE" # Must accept EULA to use this minecraft server
+  TYPE: PAPER
+  PLUGINS: |
+    https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/spigot
+    https://download.geysermc.org/v2/projects/floodgate/versions/latest/builds/latest/downloads/spigot
+    https://github.com/ViaVersion/ViaVersion/releases/download/5.11.0/ViaVersion-5.11.0.jar
+  MEMORY: 4G
+  DIFFICULTY: easy
+  VIEW_DISTANCE: "20"
+  OPS: |
+    bentastic27
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -95,7 +115,7 @@ spec:
             cpu: 2
         envFrom:
         - configMapRef:
-            name: minecraft
+            name: minecraft-survival
         volumeMounts:
         - mountPath: /data
           name: data
