@@ -44,7 +44,7 @@ metadata:
   name: bedrock
   namespace: minecraft
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: bedrock
