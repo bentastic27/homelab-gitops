@@ -31,3 +31,5 @@ spec:
       enabled: false
       minio:
         enabled: false
+    alloy:
+      enabled: false
