@@ -9,4 +9,4 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  storageClass: openebs-hostpath
+  storageClassName: openebs-hostpath
