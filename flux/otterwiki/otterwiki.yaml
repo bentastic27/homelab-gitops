@@ -5,7 +5,7 @@ metadata:
   namespace: flux
 spec:
   interval: 10m0s
-  path: "./flux/otterwiki/yaml"
+  path: "./flux/otterwiki/manifests"
   prune: true
   sourceRef:
     kind: GitRepository

@@ -10,12 +10,12 @@ resources:
 - openebs
 - charts.yaml
 - helmrepos.yaml
-- istio-kustomization.yaml
+- istio
 - public-ip-configmapper
 - minecraft
 - coredns
 - package-tracker
-- kubernetes-secrets-generator.yaml
+- kubernetes-secret-generator
 - oauth2-proxy
 - keycloak
 - external-dns
