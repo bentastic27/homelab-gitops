@@ -1,0 +1,58 @@
+name: Kustomize diff
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: head
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: base
+
+      - name: Render both sides
+        run: |
+          bash head/.github/scripts/render.sh base out/base
+          bash head/.github/scripts/render.sh head out/head
+
+      - name: Build comment
+        run: |
+          {
+            echo '<!-- kustomize-diff -->'
+            echo '## Kustomize diff (base → this PR)'
+            echo
+            if diff -ruN out/base out/head > diff.txt; then
+              echo 'No rendered changes.'
+            else
+              echo "Rendered output of every Flux Kustomization, compared by name. Substitutions (\`postBuild\`) are not applied."
+              echo
+              echo '```diff'
+              head -c 60000 diff.txt
+              echo
+              echo '```'
+              [ "$(wc -c < diff.txt)" -gt 60000 ] && echo '_Diff truncated._'
+            fi
+          } > comment.md
+
+      - name: Post or update comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          id=$(gh api "repos/${{ github.repository }}/issues/$PR/comments" --paginate \
+            --jq '[.[] | select(.body | startswith("<!-- kustomize-diff -->"))][0].id // empty')
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/${{ github.repository }}/issues/comments/$id" -F body=@comment.md
+          else
+            gh pr comment "$PR" --repo "${{ github.repository }}" --body-file comment.md
+          fi
