@@ -40,7 +40,7 @@ jobs:
               head -c 60000 diff.txt
               echo
               echo '```'
-              [ "$(wc -c < diff.txt)" -gt 60000 ] && echo '_Diff truncated._'
+              if [ "$(wc -c < diff.txt)" -gt 60000 ]; then echo '_Diff truncated._'; fi
             fi
           } > comment.md
 
