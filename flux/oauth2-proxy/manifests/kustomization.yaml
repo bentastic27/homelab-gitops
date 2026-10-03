@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - helmrepo.yaml
 - helmrelease.yaml
-- secret.yaml
-- letsencrypt-dns-cluster-issuer.yaml
-- selfsigned-cluster-issuer.yaml
+- httproute.yaml
+- oauth-secret.yaml
+- valkey.yaml

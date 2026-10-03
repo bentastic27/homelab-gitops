@@ -5,7 +5,7 @@ metadata:
   namespace: flux
 spec:
   interval: 10m0s
-  path: "./flux/keycloak/operator"
+  path: "./flux/keycloak/manifests/operator"
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,7 +20,7 @@ metadata:
   namespace: flux
 spec:
   interval: 10m0s
-  path: "./flux/keycloak/yaml"
+  path: "./flux/keycloak/manifests"
   prune: true
   sourceRef:
     kind: GitRepository
