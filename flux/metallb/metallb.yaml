@@ -5,8 +5,24 @@ metadata:
   namespace: flux
 spec:
   interval: 10m0s
-  path: "./flux/metallb/manifests"
+  path: "./flux/metallb/manifests/helm"
+  prune: true
+  wait: true
+  sourceRef:
+    kind: GitRepository
+    name: flux
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: metallb-config
+  namespace: flux
+spec:
+  interval: 10m0s
+  path: "./flux/metallb/manifests/config"
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux
+  dependsOn:
+  - name: metallb
