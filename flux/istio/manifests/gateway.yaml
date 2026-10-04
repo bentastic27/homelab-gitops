@@ -48,7 +48,7 @@ metadata:
   name: public-gateway
   namespace: istio-system
   annotations:
-    external-dns.alpha.kubernetes.io/target: "${publicIp:=0.0.0.0/0}"
+    external-dns.kubernetes.io/target: "${publicIp:=0.0.0.0/0}"
 spec:
   gatewayClassName: istio
   infrastructure:
@@ -76,7 +76,7 @@ metadata:
   name: internal-gateway
   namespace: istio-system
   annotations:
-    external-dns.alpha.kubernetes.io/target: "192.168.1.20"
+    external-dns.kubernetes.io/target: "192.168.1.20"
 spec:
   gatewayClassName: istio
   infrastructure:
