@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - namespace.yaml
 - istio-operator.yaml
-- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/experimental-install.yaml
+- https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.6.2/experimental-install.yaml
 - gateway.yaml
 - telemetries.yaml
 - kiali-server.yaml
