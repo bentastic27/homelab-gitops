@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: ddns-route53
-        image: crazymax/ddns-route53:2.9.0
+        image: crazymax/ddns-route53:2.15.0
         env:
         - name: TZ
           value: America/Detroit
