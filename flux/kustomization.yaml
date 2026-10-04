@@ -9,7 +9,6 @@ resources:
 - cpu-requests-remover-webhook
 - openebs
 - charts.yaml
-- helmrepos.yaml
 - istio
 - public-ip-configmapper
 - minecraft
