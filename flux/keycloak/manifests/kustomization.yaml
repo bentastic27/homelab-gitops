@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - authpolicy.yaml
 - backups.yaml
+- k8up-networkpolicy.yaml
 - httproute.yaml
 - keycloak.yaml
 - postgres.yaml
