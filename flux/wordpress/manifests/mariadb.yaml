@@ -60,7 +60,7 @@ spec:
         k8up.io/backupcommand: /bin/bash -c 'mariadb-dump -uroot -p"$${MARIADB_ROOT_PASSWORD}" --all-databases'
     spec:
       containers:
-      - image: mariadb:12
+      - image: mariadb:12.3
         name: mariadb
         readinessProbe:
           timeoutSeconds: 1
@@ -73,6 +73,8 @@ spec:
           tcpSocket:
             port: 3306
         env:
+        - name: MARIADB_AUTO_UPGRADE
+          value: "1"
         - name: MARIADB_PASSWORD
           valueFrom:
             secretKeyRef:
