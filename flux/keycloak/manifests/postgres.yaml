@@ -26,6 +26,9 @@ spec:
     metadata:
       labels:
         app: postgres
+      annotations:
+        k8up.io/backupcommand: /bin/bash -c 'PGPASSWORD="$${POSTGRES_PASSWORD}" pg_dumpall -U "$${POSTGRES_USER}"'
+        k8up.io/file-extension: .sql
     spec:
       containers:
         - name: postgres
