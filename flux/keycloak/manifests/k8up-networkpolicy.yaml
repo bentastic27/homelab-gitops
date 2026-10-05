@@ -1,0 +1,24 @@
+# The namespace-wide allow-hbone policy limits all pods to port 15008 egress.
+# k8up job pods need DNS, the API server (pod exec for the pg_dumpall backup
+# command) and S3.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-k8up-egress
+  namespace: keycloak
+spec:
+  podSelector:
+    matchLabels:
+      k8upjob: "true"
+  policyTypes:
+  - Egress
+  egress:
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+    - port: 443
+      protocol: TCP
+    - port: 6443
+      protocol: TCP
