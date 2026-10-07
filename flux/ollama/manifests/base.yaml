@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ollama-base
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: ollama-base
+  targetNamespace: ollama
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostnames:
+    - ollama.beansnet.net
+    targetService:
+      name: ollama
+      port: 11434
+    # oauth2-proxy is browser based; the bearer token check lives in authpolicy.yaml
+    auth: false
+  dependsOn:
+  - name: cert-manager

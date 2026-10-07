@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ollama
+  namespace: ollama
+  labels:
+    app: ollama
+spec:
+  storageClassName: openebs-hostpath
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama
+  namespace: ollama
+  labels:
+    app: ollama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+      - image: ollama/ollama:0.40.0
+        name: ollama
+        # start the server, then pull the model into the PVC (no-op once cached)
+        command:
+        - /bin/bash
+        - -c
+        - |
+          ollama serve &
+          until ollama list >/dev/null 2>&1; do sleep 1; done
+          ollama pull "$${MODEL}"
+          wait
+        env:
+        - name: MODEL
+          value: qwen2.5-coder:3b
+        - name: OLLAMA_HOST
+          value: 0.0.0.0:11434
+        # keep the model resident; one request at a time to bound KV cache memory
+        - name: OLLAMA_KEEP_ALIVE
+          value: "-1"
+        - name: OLLAMA_NUM_PARALLEL
+          value: "1"
+        - name: OLLAMA_MAX_LOADED_MODELS
+          value: "1"
+        - name: OLLAMA_CONTEXT_LENGTH
+          value: "8192"
+        ports:
+        - containerPort: 11434
+          name: ollama
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 11434
+          initialDelaySeconds: 10
+          timeoutSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 11434
+          initialDelaySeconds: 30
+          timeoutSeconds: 2
+        resources:
+          requests:
+            memory: 3Gi
+          limits:
+            memory: 4Gi
+        volumeMounts:
+        - name: data
+          mountPath: /root/.ollama
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: ollama
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama
+  namespace: ollama
+  labels:
+    app: ollama
+    istio.io/ingress-use-waypoint: "true"
+spec:
+  ports:
+  - port: 11434
+    targetPort: 11434
+    name: ollama
+  selector:
+    app: ollama
+  type: ClusterIP

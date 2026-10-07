@@ -1,0 +1,19 @@
+# Only requests carrying the generated API key (flux/ollama-api-key) are allowed.
+# If the key were ever empty this would require the header "Bearer ", which
+# HTTP clients can't send (trailing whitespace is trimmed), so it fails closed.
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: ollama-api-key
+  namespace: ollama
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: ollama
+  rules:
+  - when:
+    - key: request.headers[authorization]
+      values:
+      - "Bearer ${OLLAMA_API_KEY}"
