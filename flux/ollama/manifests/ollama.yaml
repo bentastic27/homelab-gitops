@@ -57,7 +57,7 @@ spec:
         - name: OLLAMA_MAX_LOADED_MODELS
           value: "1"
         - name: OLLAMA_CONTEXT_LENGTH
-          value: "8192"
+          value: "16384"
         ports:
         - containerPort: 11434
           name: ollama
@@ -75,9 +75,9 @@ spec:
           timeoutSeconds: 2
         resources:
           requests:
-            memory: 3Gi
+            memory: 6Gi
           limits:
-            memory: 4Gi
+            memory: 8Gi
         volumeMounts:
         - name: data
           mountPath: /root/.ollama
