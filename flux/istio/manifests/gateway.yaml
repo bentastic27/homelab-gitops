@@ -69,6 +69,22 @@ spec:
       - kind: Secret
         group: ""
         name: beansnet-cert
+  # TLS passthrough for the kube-apiserver (see flux/k8s-api); SNI picks this
+  # over the wildcard HTTPS listener above.
+  - name: k8s-api
+    protocol: TLS
+    port: 443
+    hostname: remotek8s.beansnet.net
+    allowedRoutes:
+      namespaces:
+        from: Selector
+        selector:
+          matchLabels:
+            kubernetes.io/metadata.name: default
+      kinds:
+      - kind: TLSRoute
+    tls:
+      mode: Passthrough
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
@@ -97,3 +113,24 @@ spec:
       - kind: Secret
         group: ""
         name: beansnet-cert
+---
+# Passes TLS straight through to the kube-apiserver so client certs keep working.
+# remotek8s.beansnet.net is already in the RKE2 tls-san list.
+apiVersion: gateway.networking.k8s.io/v1
+kind: TLSRoute
+metadata:
+  name: k8s-api
+  namespace: default
+spec:
+  parentRefs:
+  - name: public-gateway
+    namespace: istio-system
+    group: gateway.networking.k8s.io
+    kind: Gateway
+    sectionName: k8s-api
+  hostnames:
+  - remotek8s.beansnet.net
+  rules:
+  - backendRefs:
+    - name: kubernetes
+      port: 443
