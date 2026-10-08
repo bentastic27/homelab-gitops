@@ -46,7 +46,7 @@ spec:
           wait
         env:
         - name: MODEL
-          value: qwen3:4b
+          value: qwen3:4b-instruct
         - name: OLLAMA_HOST
           value: 0.0.0.0:11434
         # keep the model resident; one request at a time to bound KV cache memory
@@ -58,6 +58,9 @@ spec:
           value: "1"
         - name: OLLAMA_CONTEXT_LENGTH
           value: "16384"
+        # halves the KV cache (needs flash attention, which is enabled by default)
+        - name: OLLAMA_KV_CACHE_TYPE
+          value: q8_0
         ports:
         - containerPort: 11434
           name: ollama

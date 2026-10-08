@@ -18,7 +18,7 @@ Example config in `~/.config/opencode/opencode.json`:
         "apiKey": "{env:OLLAMA_API_KEY}"
       },
       "models": {
-        "qwen3:4b": { "name": "Qwen3 4B" }
+        "qwen3:4b-instruct": { "name": "Qwen3 4B Instruct" }
       }
     }
   }
