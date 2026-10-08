@@ -46,7 +46,7 @@ spec:
           wait
         env:
         - name: MODEL
-          value: qwen2.5-coder:3b
+          value: qwen3:4b
         - name: OLLAMA_HOST
           value: 0.0.0.0:11434
         # keep the model resident; one request at a time to bound KV cache memory
