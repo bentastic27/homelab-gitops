@@ -16,7 +16,9 @@ spec:
         kind: HelmRepository
         name: external-dns
   values:
-    policy: upsert-only
+    policy: sync
+    domainFilters:
+    - beansnet.net
     provider:
       name: aws
     sources:
