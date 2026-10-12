@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres
+  namespace: inventree
+  annotations:
+    secret-generator.v1.mittwald.de/type: string
+    secret-generator.v1.mittwald.de/secure: "yes"
+    secret-generator.v1.mittwald.de/autogenerate: password
+stringData:
+  username: inventree
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+  namespace: inventree
+  labels:
+    app: postgres
+spec:
+  serviceName: postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+      annotations:
+        k8up.io/backupcommand: /bin/bash -c 'PGPASSWORD="$${POSTGRES_PASSWORD}" pg_dumpall -U "$${POSTGRES_USER}"'
+        k8up.io/file-extension: .sql
+    spec:
+      containers:
+        - name: postgres
+          # InvenTree supports Postgres up to and including 17
+          image: mirror.gcr.io/postgres:17
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres
+                  key: password
+            - name: POSTGRES_DB
+              value: "inventree"
+          ports:
+            - name: postgres
+              containerPort: 5432
+          resources:
+            requests:
+              memory: 256Mi
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: openebs-hostpath
+      resources:
+        requests:
+          storage: 8Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+  namespace: inventree
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP

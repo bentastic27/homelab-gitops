@@ -21,4 +21,5 @@ resources:
 - otterwiki
 - k8up
 - wordpress
+- inventree
 # - ollama

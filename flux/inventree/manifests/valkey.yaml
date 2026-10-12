@@ -1,0 +1,52 @@
+# Cache only (InvenTree's redis cache); nothing here needs to survive a restart.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey
+  namespace: inventree
+  labels:
+    app: valkey
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: valkey
+  template:
+    metadata:
+      labels:
+        app: valkey
+    spec:
+      containers:
+      - name: valkey
+        image: valkey/valkey:9
+        command: ["valkey-server"]
+        args:
+        - --save
+        - ""
+        - --appendonly
+        - "no"
+        - --loglevel
+        - notice
+        ports:
+        - containerPort: 6379
+          name: valkey
+        resources:
+          requests:
+            memory: 64Mi
+          limits:
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: valkey
+  namespace: inventree
+  labels:
+    app: valkey
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+    name: valkey
+  selector:
+    app: valkey

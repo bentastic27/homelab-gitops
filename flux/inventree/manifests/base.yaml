@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: inventree-base
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 5m
+  releaseName: inventree-base
+  targetNamespace: inventree
+  install:
+    createNamespace: false
+  chartRef:
+    kind: HelmChart
+    name: base-components
+  values:
+    hostnames:
+    - inventree.beansnet.net
+    targetService:
+      name: inventree
+      # the chart's nginx proxy (serves static/media, proxies to gunicorn)
+      port: 80
+    # InvenTree has its own login, and the mobile app / API tokens can't
+    # follow an oauth2-proxy redirect.
+    auth: false
+  dependsOn:
+  - name: cert-manager
