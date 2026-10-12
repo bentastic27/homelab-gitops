@@ -52,6 +52,8 @@ spec:
       INVENTREE_PLUGIN_FILE: /etc/inventree/plugins.txt
       # activates the plugin on boot so it doesn't need enabling in Admin > Plugins
       INVENTREE_PLUGINS_MANDATORY: inventree-mcp
+      # lets plugins register URL routes; inventree-mcp's /mcp/ endpoint needs it
+      INVENTREE_GLOBAL_SETTINGS: '{"ENABLE_PLUGINS_URL": true}'
     volumes:
     - name: plugins-file
       configMap:
