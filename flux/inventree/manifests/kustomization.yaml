@@ -7,6 +7,7 @@ resources:
 - helmrelease.yaml
 - helmrepo.yaml
 - networkpolicy.yaml
+- plugins.yaml
 - postgres.yaml
 - secrets.yaml
 - valkey.yaml

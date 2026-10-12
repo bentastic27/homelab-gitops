@@ -1,0 +1,13 @@
+# InvenTree pip-installs everything listed here on startup (server, worker and
+# the migration init container) whenever the file changes or a pod is replaced,
+# so plugins survive restarts without being baked into the image.
+# Pods only read this at startup: restart the inventree deployments after editing.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inventree-plugins
+  namespace: inventree
+data:
+  plugins.txt: |
+    # InvenTree Plugins (uses PIP framework to install)
+    inventree-mcp==0.3.0

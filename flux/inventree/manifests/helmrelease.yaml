@@ -46,12 +46,34 @@ spec:
         value: valkey
       - name: INVENTREE_CACHE_PORT
         value: "6379"
+    # Plugins come from the inventree-plugins ConfigMap (plugins.yaml) instead of
+    # the writable plugins.txt on the data volume, so they're managed in git.
+    env:
+      INVENTREE_PLUGIN_FILE: /etc/inventree/plugins.txt
+      # activates the plugin on boot so it doesn't need enabling in Admin > Plugins
+      INVENTREE_PLUGINS_MANDATORY: inventree-mcp
+    volumes:
+    - name: plugins-file
+      configMap:
+        name: inventree-plugins
+    volumeMounts:
+    - name: plugins-file
+      mountPath: /etc/inventree
+      readOnly: true
     resources:
       requests:
         memory: 512Mi
     worker:
       # the chart doesn't default this and renders `replicas:` empty otherwise
       replicaCount: 1
+      volumes:
+      - name: plugins-file
+        configMap:
+          name: inventree-plugins
+      volumeMounts:
+      - name: plugins-file
+        mountPath: /etc/inventree
+        readOnly: true
       resources:
         requests:
           memory: 256Mi
