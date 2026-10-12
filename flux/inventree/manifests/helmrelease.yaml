@@ -20,7 +20,7 @@ spec:
       interval: 5m
   values:
     global:
-      siteUrl: https://inventree.beansnet.net
+      siteUrl: https://inventree.int.beansnet.net
       adminSecret: inventree-admin
       dbSecrets:
       - name: INVENTREE_DB_ENGINE
