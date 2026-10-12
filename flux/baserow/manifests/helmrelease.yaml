@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: baserow
+  namespace: flux
+spec:
+  interval: 10m
+  timeout: 15m
+  releaseName: baserow
+  targetNamespace: baserow
+  install:
+    createNamespace: false
+  chart:
+    spec:
+      chart: baserow
+      version: '1.0.35'
+      sourceRef:
+        kind: HelmRepository
+        name: baserow
+      interval: 5m
+  values:
+    global:
+      baserow:
+        # one hostname for everything: / is the frontend, /api and /ws the
+        # backend, /files the minio bucket (see httproute.yaml)
+        domain: baserow.int.beansnet.net
+        backendDomain: baserow.int.beansnet.net
+        objectsDomain: baserow.int.beansnet.net/files
+        envFrom:
+        - secretRef:
+            name: baserow-env
+    # postgres and valkey live next to the chart, routing is our own HTTPRoute
+    postgresql:
+      enabled: false
+    redis:
+      enabled: false
+    ingress:
+      enabled: false
+    caddy:
+      enabled: false
+    # user uploads; the shared bucket is what lets every backend pod see them
+    minio:
+      persistence:
+        size: 10Gi
+        storageClass: openebs-hostpath
+        annotations:
+          k8up.io/backup: "true"
+  postRenderers:
+  - kustomize:
+      patches:
+      - target:
+          version: v1
+          kind: Service
+        patch: |
+          - op: add
+            path: /metadata/labels/istio.io~1ingress-use-waypoint
+            value: "true"

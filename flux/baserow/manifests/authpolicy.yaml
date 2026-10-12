@@ -1,0 +1,105 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: baserow-frontend
+  namespace: baserow
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: baserow-baserow-frontend
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - istio-system
+        - baserow
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: baserow-backend-wsgi
+  namespace: baserow
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: baserow-baserow-backend-wsgi
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - istio-system
+        - baserow
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: baserow-backend-asgi
+  namespace: baserow
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: baserow-baserow-backend-asgi
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - istio-system
+        - baserow
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: baserow-minio
+  namespace: baserow
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: baserow-minio
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - istio-system
+        - baserow
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: baserow-postgres
+  namespace: baserow
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: postgres
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - baserow
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: baserow-valkey
+  namespace: baserow
+spec:
+  action: ALLOW
+  targetRefs:
+  - kind: Service
+    group: ""
+    name: valkey
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - baserow

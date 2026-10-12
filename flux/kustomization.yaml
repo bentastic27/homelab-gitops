@@ -22,4 +22,5 @@ resources:
 - k8up
 - wordpress
 - inventree
+- baserow
 # - ollama
