@@ -48,6 +48,16 @@ spec:
   postRenderers:
   - kustomize:
       patches:
+      # Scaled to 0 while comparing against NocoDB. Postgres, valkey and minio
+      # stay up so data is kept and the chart's migration/provisioning hooks still run.
+      # Remove this patch to bring Baserow back.
+      - target:
+          kind: Deployment
+          name: baserow-baserow-.*
+        patch: |
+          - op: add
+            path: /spec/replicas
+            value: 0
       - target:
           version: v1
           kind: Service

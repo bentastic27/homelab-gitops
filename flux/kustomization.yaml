@@ -23,4 +23,5 @@ resources:
 - wordpress
 - inventree
 - baserow
+- nocodb
 # - ollama
