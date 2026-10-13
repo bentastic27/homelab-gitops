@@ -22,6 +22,6 @@ resources:
 - k8up
 - wordpress
 - inventree
-- baserow
+#- baserow
 - nocodb
 # - ollama
