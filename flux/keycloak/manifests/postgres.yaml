@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: mirror.gcr.io/postgres:17
+          image: mirror.gcr.io/postgres:18
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -53,7 +53,7 @@ spec:
               containerPort: 5432
           volumeMounts:
             - name: postgres-data
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
   volumeClaimTemplates:
   - metadata:
       name: postgres-data
