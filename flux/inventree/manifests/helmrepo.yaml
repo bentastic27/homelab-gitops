@@ -1,8 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
-metadata:
-  name: inventree
-  namespace: flux
-spec:
-  interval: 10m0s
-  url: https://inventree.github.io/helm-charts

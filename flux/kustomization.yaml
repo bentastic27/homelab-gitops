@@ -21,7 +21,4 @@ resources:
 - otterwiki
 - k8up
 - wordpress
-- inventree
 #- baserow
-- nocodb
-# - ollama
